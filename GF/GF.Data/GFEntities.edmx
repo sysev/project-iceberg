@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GFDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="GFDBModelStoreContainer">
+          <EntitySet Name="AutoReplenishment" EntityType="GFDBModel.Store.AutoReplenishment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MaterialAvailability" EntityType="GFDBModel.Store.MaterialAvailability" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderRoll" EntityType="GFDBModel.Store.OrderRoll" store:Type="Tables" store:Schema="dbo" store:Name="OrderRoll">
+            <DefiningQuery>SELECT 
+      [OrderRoll].[CutomerID] AS [CutomerID], 
+      [OrderRoll].[GlatfelterOrderNumber] AS [GlatfelterOrderNumber], 
+      [OrderRoll].[CustomerPONumber] AS [CustomerPONumber], 
+      [OrderRoll].[RollNumber] AS [RollNumber], 
+      [OrderRoll].[MaterialNumber] AS [MaterialNumber], 
+      [OrderRoll].[CustomerPartNumber] AS [CustomerPartNumber], 
+      [OrderRoll].[RollWeight] AS [RollWeight], 
+      [OrderRoll].[OrderDate] AS [OrderDate], 
+      [OrderRoll].[ShippedDate] AS [ShippedDate], 
+      [OrderRoll].[ScheduleDeliveryDate] AS [ScheduleDeliveryDate], 
+      [OrderRoll].[Carrier] AS [Carrier], 
+      [OrderRoll].[ReceivedDate] AS [ReceivedDate], 
+      [OrderRoll].[UsedDate] AS [UsedDate], 
+      [OrderRoll].[LastPhysicalDate] AS [LastPhysicalDate], 
+      [OrderRoll].[ShipmentNumber] AS [ShipmentNumber], 
+      [OrderRoll].[DeliveryNumber] AS [DeliveryNumber]
+      FROM [dbo].[OrderRoll] AS [OrderRoll]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="AutoReplenishment">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="MaterialNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="AutoReplenishment" Type="bit" Nullable="false" />
+          <Property Name="ReplenishmentThreshold" Type="int" Nullable="false" />
+          <Property Name="ReorderAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialAvailability">
+          <Key>
+            <PropertyRef Name="MaterialNumber" />
+          </Key>
+          <Property Name="MaterialNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="QuanityInStock" Type="int" Nullable="false" />
+          <Property Name="RollWeight" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'GFDB.dbo.OrderRoll' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="OrderRoll">
+          <Key>
+            <PropertyRef Name="CutomerID" />
+            <PropertyRef Name="GlatfelterOrderNumber" />
+            <PropertyRef Name="CustomerPONumber" />
+            <PropertyRef Name="RollNumber" />
+            <PropertyRef Name="MaterialNumber" />
+            <PropertyRef Name="CustomerPartNumber" />
+            <PropertyRef Name="RollWeight" />
+            <PropertyRef Name="OrderDate" />
+            <PropertyRef Name="ShippedDate" />
+            <PropertyRef Name="ScheduleDeliveryDate" />
+            <PropertyRef Name="Carrier" />
+            <PropertyRef Name="ReceivedDate" />
+            <PropertyRef Name="UsedDate" />
+            <PropertyRef Name="LastPhysicalDate" />
+            <PropertyRef Name="ShipmentNumber" />
+            <PropertyRef Name="DeliveryNumber" />
+          </Key>
+          <Property Name="CutomerID" Type="int" Nullable="false" />
+          <Property Name="GlatfelterOrderNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="CustomerPONumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="RollNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="MaterialNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="CustomerPartNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="RollWeight" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="ShippedDate" Type="datetime" Nullable="false" />
+          <Property Name="ScheduleDeliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="Carrier" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ReceivedDate" Type="datetime" Nullable="false" />
+          <Property Name="UsedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPhysicalDate" Type="datetime" Nullable="false" />
+          <Property Name="ShipmentNumber" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DeliveryNumber" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GFDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GFDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="AutoReplenishments" EntityType="GFDBModel.AutoReplenishment" />
+          <EntitySet Name="MaterialAvailabilities" EntityType="GFDBModel.MaterialAvailability" />
+          <EntitySet Name="OrderRolls" EntityType="GFDBModel.OrderRoll" />
+        </EntityContainer>
+        <EntityType Name="AutoReplenishment">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="AutoReplenishment1" Type="Boolean" Nullable="false" />
+          <Property Name="ReplenishmentThreshold" Type="Int32" Nullable="false" />
+          <Property Name="ReorderAmount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialAvailability">
+          <Key>
+            <PropertyRef Name="MaterialNumber" />
+          </Key>
+          <Property Name="MaterialNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="QuanityInStock" Type="Int32" Nullable="false" />
+          <Property Name="RollWeight" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderRoll">
+          <Key>
+            <PropertyRef Name="CutomerID" />
+            <PropertyRef Name="GlatfelterOrderNumber" />
+            <PropertyRef Name="CustomerPONumber" />
+            <PropertyRef Name="RollNumber" />
+            <PropertyRef Name="MaterialNumber" />
+            <PropertyRef Name="CustomerPartNumber" />
+            <PropertyRef Name="RollWeight" />
+            <PropertyRef Name="OrderDate" />
+            <PropertyRef Name="ShippedDate" />
+            <PropertyRef Name="ScheduleDeliveryDate" />
+            <PropertyRef Name="Carrier" />
+            <PropertyRef Name="ReceivedDate" />
+            <PropertyRef Name="UsedDate" />
+            <PropertyRef Name="LastPhysicalDate" />
+            <PropertyRef Name="ShipmentNumber" />
+            <PropertyRef Name="DeliveryNumber" />
+          </Key>
+          <Property Name="CutomerID" Type="Int32" Nullable="false" />
+          <Property Name="GlatfelterOrderNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CustomerPONumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="RollNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="MaterialNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CustomerPartNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="RollWeight" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShippedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ScheduleDeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Carrier" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ReceivedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPhysicalDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShipmentNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DeliveryNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GFDBModelStoreContainer" CdmEntityContainer="GFDBEntities">
+          <EntitySetMapping Name="AutoReplenishments">
+            <EntityTypeMapping TypeName="GFDBModel.AutoReplenishment">
+              <MappingFragment StoreEntitySet="AutoReplenishment">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="MaterialNumber" ColumnName="MaterialNumber" />
+                <ScalarProperty Name="AutoReplenishment1" ColumnName="AutoReplenishment" />
+                <ScalarProperty Name="ReplenishmentThreshold" ColumnName="ReplenishmentThreshold" />
+                <ScalarProperty Name="ReorderAmount" ColumnName="ReorderAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialAvailabilities">
+            <EntityTypeMapping TypeName="GFDBModel.MaterialAvailability">
+              <MappingFragment StoreEntitySet="MaterialAvailability">
+                <ScalarProperty Name="MaterialNumber" ColumnName="MaterialNumber" />
+                <ScalarProperty Name="QuanityInStock" ColumnName="QuanityInStock" />
+                <ScalarProperty Name="RollWeight" ColumnName="RollWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderRolls">
+            <EntityTypeMapping TypeName="GFDBModel.OrderRoll">
+              <MappingFragment StoreEntitySet="OrderRoll">
+                <ScalarProperty Name="CutomerID" ColumnName="CutomerID" />
+                <ScalarProperty Name="GlatfelterOrderNumber" ColumnName="GlatfelterOrderNumber" />
+                <ScalarProperty Name="CustomerPONumber" ColumnName="CustomerPONumber" />
+                <ScalarProperty Name="RollNumber" ColumnName="RollNumber" />
+                <ScalarProperty Name="MaterialNumber" ColumnName="MaterialNumber" />
+                <ScalarProperty Name="CustomerPartNumber" ColumnName="CustomerPartNumber" />
+                <ScalarProperty Name="RollWeight" ColumnName="RollWeight" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="ScheduleDeliveryDate" ColumnName="ScheduleDeliveryDate" />
+                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="UsedDate" ColumnName="UsedDate" />
+                <ScalarProperty Name="LastPhysicalDate" ColumnName="LastPhysicalDate" />
+                <ScalarProperty Name="ShipmentNumber" ColumnName="ShipmentNumber" />
+                <ScalarProperty Name="DeliveryNumber" ColumnName="DeliveryNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

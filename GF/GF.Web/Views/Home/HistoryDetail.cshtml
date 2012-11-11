@@ -1,0 +1,89 @@
+﻿@using GF.Web.Infrastructure
+@model IEnumerable<GF.Data.OrderRoll>
+
+@{
+    ViewBag.Title = "HistoryDetail";
+}
+
+<h2>History Detail</h2>
+ 
+<table id="history">
+      <thead>
+    <tr>        
+        <th>
+           Role #
+        </th>
+        <th>
+           Material #
+        </th>
+        <th>
+           Cust Part #
+        </th>
+        <th>
+           Weight
+        </th>
+        <th>
+           Date Ordered
+        </th>
+        <th>
+           Date Shipped
+        </th> 
+        <th>
+           Date Received
+        </th> 
+        <th>
+           Last Phys Inv Date
+        </th> 
+           <th>
+           PO Number
+        </th> 
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RollNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaterialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerPartNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RollWeight)
+                </td>
+                <td>
+
+                    @Html.SimpleDate(@item.OrderDate)
+                </td>
+                <td>
+
+                    @Html.SimpleDate(@item.ShippedDate)
+                </td>
+                <td>
+
+                    @Html.SimpleDate(@item.ReceivedDate)
+                </td>
+                <td>
+                    @Html.SimpleDate(@item.LastPhysicalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerPONumber)
+                </td>
+
+            </tr>
+}
+
+    </tbody>
+</table>
+    
+     <script type="text/javascript">
+
+        jQuery(document).ready(function(){
+            $("#history").dataTable(); 
+        });
+
+
+    </script>
