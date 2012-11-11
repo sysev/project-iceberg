@@ -82,6 +82,7 @@
     <Compile Include="MaterialAvailability.cs">
       <DependentUpon>GFEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GFDBInMemoryEntities.cs" />
     <Compile Include="Models\GFRepository.cs" />
     <Compile Include="OrderRoll.cs">
       <DependentUpon>GFEntities.tt</DependentUpon>
