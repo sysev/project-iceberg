@@ -78,11 +78,24 @@
 
     </tbody>
 </table>
+<div id="buttons"></div>
     
      <script type="text/javascript">
 
         jQuery(document).ready(function(){
-            $("#history").dataTable(); 
+            var oTable = $("#history").dataTable( );
+
+            var oTableTools = new TableTools(oTable, {
+                "sSwfPath": "http://datatables.net/release-datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf",
+                "buttons": [
+                    "copy",
+                    "csv",
+                    "xls",
+                    "pdf",
+                    { "type": "print", "buttonText": "Print me!" }
+                ]
+            });
+            $("#buttons").before(oTableTools.dom.container);
         });
 
 

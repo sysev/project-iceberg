@@ -7,10 +7,17 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
-         @Scripts.Render("~/bundles/jquery") 
-        <link href="~/Content/themes/base/jquery.dataTables.css" rel="stylesheet" />
-
-        <script src="~/Scripts/jquery.dataTables.min.js"></script>
+        @Scripts.Render("~/bundles/jquery") 
+        <!-- RPH -- For some reason, this render bundle doesn't work. 
+            So I am adding datatables stuff old school
+          Scripts.Render("~/bundles/datatables");
+         -->
+        <link href="/Content/themes/base/jquery.dataTables.css" rel="stylesheet" />
+        <script src="/Scripts/jquery.dataTables.min.js"></script>
+        <script src="/Scripts/TableTools.min.js"></script> 
+        <link href="/Content/themes/base/TableTools.css" rel="stylesheet" />
+        <script src="/Scripts/ZeroClipboard.js"></script>
+        
     </head>
     <body>
         <header>

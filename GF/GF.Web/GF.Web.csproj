@@ -132,7 +132,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\themes\base\demo_table_jui.css" />
+    <Content Include="Content\themes\base\images\background.png" />
+    <Content Include="Content\themes\base\images\collection.png" />
+    <Content Include="Content\themes\base\images\collection_hover.png" />
+    <Content Include="Content\themes\base\images\copy.png" />
+    <Content Include="Content\themes\base\images\copy_hover.png" />
+    <Content Include="Content\themes\base\images\csv.png" />
+    <Content Include="Content\themes\base\images\csv_hover.png" />
+    <Content Include="Content\themes\base\images\pdf.png" />
+    <Content Include="Content\themes\base\images\pdf_hover.png" />
+    <Content Include="Content\themes\base\images\print.png" />
+    <Content Include="Content\themes\base\images\print_hover.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -146,6 +158,8 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\xls.png" />
+    <Content Include="Content\themes\base\images\xls_hover.png" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Content\themes\base\jquery.dataTables.css" />
     <Content Include="Content\themes\base\jquery.ui.accordion.css" />
@@ -188,9 +202,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\TableTools.css" />
+    <Content Include="Content\themes\base\TableTools_JUI.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\Images\Sorting icons.psd" />
+    <Content Include="Content\themes\base\images\psd\collection.psd" />
+    <Content Include="Content\themes\base\images\psd\copy document.psd" />
+    <Content Include="Content\themes\base\images\psd\file_types.psd" />
+    <Content Include="Content\themes\base\images\psd\printer.psd" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Content\themes\Images\back_disabled.png" />
     <Content Include="Content\themes\Images\back_enabled.png" />
@@ -219,6 +239,8 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\TableTools.min.js" />
+    <Content Include="Scripts\ZeroClipboard.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
