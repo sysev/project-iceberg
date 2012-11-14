@@ -9,7 +9,13 @@ namespace GF.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private GFRepository _gfRepository = new GFRepository();
+        private IGFRepository _gfRepository;
+
+        public HomeController() { }
+        public HomeController(IGFRepository GfRepository)
+        {
+            _gfRepository = new GFDBInMemoryEntities();
+        }
 
         public ActionResult Index()
         {

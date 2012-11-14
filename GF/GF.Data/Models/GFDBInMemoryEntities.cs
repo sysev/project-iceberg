@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GF.Data.Models
 {
-    public class GFDBInMemoryEntities
+    public class GFDBInMemoryEntities : IGFRepository
     {
-        public List<OrderRoll> getOrderRolls()
+        public IList<OrderRoll> GetOrderRolls(int CutomerID)
         {
             var result = new List<OrderRoll>();
 
