@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GF.Data.Helpers;
 
 namespace GF.Data.Models
 {
     public class GFDBInMemoryEntities : IGFRepository
     {
-        public IList<OrderRoll> GetOrderRolls(int CutomerID)
-        {
-            var result = new List<OrderRoll>();
 
-            for (int i = 1; i < 100; i++) {
-                result.Add(getOrderRoll(1, i, i+1));
+        public IList<MaterialAvailability> GetMaterialAvailability(int CustomerID)
+        {
+            var result = new List<MaterialAvailability>();
+
+            for (int i = 1; i < 2000; i++)
+            {
+                result.Add(getMaterialAvailability(1, i, i + 1));
             }
 
+            return result;
+        }
+
+        public IList<OrderRoll> GetOrderRolls(int CutomerID)
+        {
+            var result = new List<OrderRoll>(); 
+            for (int i = 1; i < 2000; i++) {
+                result.Add(getOrderRoll(1, i, i+1));
+            }
             return result;
         }
 
@@ -35,6 +47,18 @@ namespace GF.Data.Models
                 ReceivedDate = getDate(5 - val2),
                 LastPhysicalDate = getDate(0),
                 CustomerPONumber = "CPO" + num
+            };
+        }
+
+        private static MaterialAvailability getMaterialAvailability(int val1, int val2, int val3)
+        {
+            string num = "M" + (val1 % 2) + (val2 % 3) + (val3 % 4);
+
+            return new MaterialAvailability()
+            {
+               MaterialNumber = num,
+               QuanityInStock = val1 % 10,
+               RollWeight = val2 % 9 
             };
         }
 

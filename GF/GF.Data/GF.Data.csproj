@@ -106,9 +106,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GFEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OrderByHelper.cs" />
     <Compile Include="MaterialAvailability.cs">
       <DependentUpon>GFEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extensions.cs" />
     <Compile Include="Models\GFDBInMemoryEntities.cs" />
     <Compile Include="Models\GFRepository.cs" />
     <Compile Include="Models\IGFRepository.cs" />

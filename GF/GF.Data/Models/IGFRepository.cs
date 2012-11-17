@@ -8,6 +8,7 @@ namespace GF.Data.Models
 {
     public interface IGFRepository
     {
-         IList<OrderRoll> GetOrderRolls(int CustomerID);
+        IList<OrderRoll> GetOrderRolls(int CustomerID);
+        IList<MaterialAvailability> GetMaterialAvailability(int CustomerID);
     }
 }

@@ -54,6 +54,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -143,6 +144,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\MyHelpers.cs" />
+    <Compile Include="Models\ColumnDef.cs" />
+    <Compile Include="Models\MaterialAvailabilityViewModel.cs" />
+    <Compile Include="Models\DataTable.cs" />
+    <Compile Include="Models\DataTableResult.cs" />
+    <Compile Include="Models\HistoryDetailViewModel.cs" />
+    <Compile Include="Models\ObjectItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -287,10 +294,11 @@
     <Content Include="packages.config" />
     <None Include="readme.txt" />
     <Content Include="Views\Home\HistoryDetail.cshtml" />
+    <Content Include="Views\Home\HistoryDetailServerSide.cshtml" />
+    <Content Include="Views\Home\MaterialAvailabilityServerSide.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GF.Data\GF.Data.csproj">

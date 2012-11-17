@@ -13,7 +13,12 @@ namespace GF.Data.Models
         GFDBEntities context = new GFDBEntities();
 
        // GFDBInMemoryEntities context = new GFDBInMemoryEntities();
-        
+
+        public IList<MaterialAvailability> GetMaterialAvailability(int CustomerID)
+        {
+            return context.MaterialAvailabilities.ToList<MaterialAvailability>();
+        }
+
         public IList<OrderRoll> GetOrderRolls(int CustomerID)
         {
             
