@@ -11,12 +11,13 @@
         <!-- RPH -- For some reason, this render bundle doesn't work. 
             So I am adding datatables stuff old school
           Scripts.Render("~/bundles/datatables");
-         -->
-        <link href="/Content/themes/base/jquery.dataTables.css" rel="stylesheet" />
-        <script src="/Scripts/jquery.dataTables.min.js"></script>
-        <script src="/Scripts/TableTools.min.js"></script> 
-        <link href="/Content/themes/base/TableTools.css" rel="stylesheet" />
-        <script src="/Scripts/ZeroClipboard.js"></script>
+         --> 
+       @Styles.Render("~/Content/themes/base/jquery.dataTables.css")
+       @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+       @Scripts.Render("~/Scripts/TableTools.min.js") 
+       @Scripts.Render("~/Scripts/ZeroClipboard.js")  
+        @Styles.Render("~/Content/themes/base/TableTools.css");
+        
         
     </head>
     <body>

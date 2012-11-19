@@ -9,21 +9,36 @@ using GF.Data;
 using GF.Data.Helpers;
 using GF.Data.Models;
 using GF.Web.Models;
+using GF.Web.Security;
 
 namespace GF.Web.Controllers
 {
+    /// <summary>
+    ///   Home Controller Class for proto
+    ///      
+    /// </summary> 
     public class HomeController : Controller
     {
         private IGFRepository _gfRepository;
-         
-        public HomeController(IGFRepository GfRepository)
+        private GFPrincipal _gfPrincipal;
+       
+        public HomeController(IGFRepository GfRepository, GFPrincipal GfPrincipal)
         {
             _gfRepository = GfRepository;
+            _gfPrincipal = GfPrincipal;
+        }
+
+        private int CustomerID
+        {
+            get
+            { 
+                return (_gfPrincipal.Identity as GFIdentity).CustomerID; 
+            }
         }
 
         public ActionResult Index()
         {
-            return RedirectToAction("HistoryDetailServerSide", new { CustomerID = 1 }); 
+            return RedirectToAction("HistoryDetailServerSide", new { CustomerID = CustomerID }); 
         }
 
         public ActionResult HistoryDetail(int? CustomerID)
@@ -43,7 +58,7 @@ namespace GF.Web.Controllers
         {
             var model = new HistoryDetailViewModel(); 
             var orderByClause = model.GetOrderByClause(dataTable);
-            IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(1).OrderBy(orderByClause).ToList<OrderRoll>(); 
+            IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>(); 
             return GetTableRows<OrderRoll>(dataTable, HistoryDetails, model.Columns); 
         }
 
@@ -55,9 +70,10 @@ namespace GF.Web.Controllers
         [HttpPost]
         public ActionResult GetMaterialAvailability(DataTable dataTable)
         {
+           
             var model = new MaterialAvailabilityViewModel();
             var orderByClause = model.GetOrderByClause(dataTable);
-            IList<MaterialAvailability> items = _gfRepository.GetMaterialAvailability(1).OrderBy(orderByClause).ToList<MaterialAvailability>();
+            IList<MaterialAvailability> items = _gfRepository.GetMaterialAvailability(CustomerID).OrderBy(orderByClause).ToList<MaterialAvailability>();
             return GetTableRows<MaterialAvailability>(dataTable, items, model.Columns);
         }
 

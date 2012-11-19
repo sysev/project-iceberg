@@ -14,7 +14,7 @@ namespace GF.Data.Models
         {
             var result = new List<MaterialAvailability>();
 
-            for (int i = 1; i < 2000; i++)
+            for (int i = 1; i < 20000; i++)
             {
                 result.Add(getMaterialAvailability(1, i, i + 1));
             }
@@ -22,13 +22,18 @@ namespace GF.Data.Models
             return result;
         }
 
+        private static IList<OrderRoll> _orderRolls;
         public IList<OrderRoll> GetOrderRolls(int CutomerID)
         {
-            var result = new List<OrderRoll>(); 
-            for (int i = 1; i < 2000; i++) {
-                result.Add(getOrderRoll(1, i, i+1));
+            if (_orderRolls == null)
+            {
+                _orderRolls = new List<OrderRoll>();
+                for (int i = 1; i < 20000; i++)
+                {
+                    _orderRolls.Add(getOrderRoll(1, i, i + 1));
+                }
             }
-            return result;
+            return _orderRolls;
         }
 
 

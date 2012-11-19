@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using GF.Web.Security;
 
 namespace GF.Web
 {
@@ -16,15 +17,23 @@ namespace GF.Web
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
-            
-
+            AreaRegistration.RegisterAllAreas(); 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes); 
-            BundleConfig.RegisterBundles(BundleTable.Bundles); 
-            
-            
+            BundleConfig.RegisterBundles(BundleTable.Bundles);  
+        }
+
+        protected void Application_AuthenticateRequest(Object sender, EventArgs e)
+        {
+            // var customerId = System.Web.HttpContext.Current.Request.Headers["CustomerID"];
+            var customerId = 1;
+              Context.User = new GFPrincipal( 
+                  new GFIdentity() { 
+                    IsAuthenticated = true, 
+                    Name = "TestUser", 
+                    CustomerID = customerId }
+                  ); 
         }
     }
 }

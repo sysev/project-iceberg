@@ -151,6 +151,8 @@
     <Compile Include="Models\HistoryDetailViewModel.cs" />
     <Compile Include="Models\ObjectItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\GFIdentity.cs" />
+    <Compile Include="Security\GFPrincipal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\swf\copy_csv_xls_pdf.swf" />
@@ -232,6 +234,7 @@
     <Content Include="Content\themes\base\images\psd\copy document.psd" />
     <Content Include="Content\themes\base\images\psd\file_types.psd" />
     <Content Include="Content\themes\base\images\psd\printer.psd" />
+    <None Include="Properties\PublishProfiles\Copy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Content\themes\Images\back_disabled.png" />
     <Content Include="Content\themes\Images\back_enabled.png" />

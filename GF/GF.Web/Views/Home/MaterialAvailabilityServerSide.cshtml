@@ -29,7 +29,7 @@
             "sPaginationType": "full_numbers",
             "bProcessing": true,
             "bServerSide": true,
-            "sAjaxSource": "/Home/GetMaterialAvailability",
+            "sAjaxSource": '@Url.Content("~/Home/GetMaterialAvailability")', 
             "fnServerData": function (url, data, callback) {
                 $.ajax({
                     "url": url,

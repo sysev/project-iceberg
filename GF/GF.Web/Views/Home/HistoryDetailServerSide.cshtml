@@ -29,7 +29,7 @@
             "sPaginationType": "full_numbers",
             "bProcessing": true,
             "bServerSide": true,
-            "sAjaxSource": "/Home/GetOrderRollHistory",
+            "sAjaxSource": '@Url.Content("~/Home/GetOrderRollHistory")',
             "fnServerData": function (url, data, callback) {
                 $.ajax({
                     "url": url,

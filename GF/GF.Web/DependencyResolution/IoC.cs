@@ -16,6 +16,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
+using System.Security.Principal;
+using System.Web;
+using GF.Web.Security;
 using StructureMap;
 namespace GF.Web.DependencyResolution {
     public static class IoC {
@@ -28,6 +31,7 @@ namespace GF.Web.DependencyResolution {
                                         scan.WithDefaultConventions();
                                     });
                             x.For<GF.Data.Models.IGFRepository>().Use<GF.Data.Models.GFDBInMemoryEntities>();
+                            x.For<GFPrincipal>().Use(() => HttpContext.Current.User as GFPrincipal);
                         });
             return ObjectFactory.Container;
         }
