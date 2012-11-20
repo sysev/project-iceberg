@@ -9,6 +9,13 @@ namespace GF.Web.Models
 {
     public class HistoryDetailViewModel : ObjectItemViewModel<OrderRoll>
     {
+        public HistoryDetailViewModel() { }
+        public HistoryDetailViewModel(string key, string Cols)
+        {
+            this.ViewKey = key;
+            this.Cols = Cols;
+        }
+         
         private static IList<ColumnDef<OrderRoll>> ColumnDefs = 
              new List<ColumnDef<OrderRoll>>(){
         

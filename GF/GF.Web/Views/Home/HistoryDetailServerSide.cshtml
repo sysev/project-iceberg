@@ -8,6 +8,7 @@
 <h2>Order History (Server-side)</h2>
 
 <div id="dynamic">
+    <div>@Model.ViewKey @Model.Cols</div>
     <table id="orderHistory" width="100%">
         <thead>
             <tr>
@@ -24,13 +25,30 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //http://www.datatables.net
-        $('#orderHistory').dataTable({
-            //"sDom": "rt",        
+       var viewKey = '@Model.ViewKey';
+       var oTables; 
+       oTables = $('#orderHistory').dataTable({
+            "sDom": 'C<"clear">lfrtip',        
             "sPaginationType": "full_numbers",
-            "bProcessing": true,
+            "aoColumnDefs": [
+                 { "bVisible": false, "aTargets": [@Model.Cols] }
+            ],
+            "bProcessing": true, 
             "bServerSide": true,
+            "bFilter": false, 
             "sAjaxSource": '@Url.Content("~/Home/GetOrderRollHistory")',
-            "fnServerData": function (url, data, callback) {
+             "fnServerData": function (url, data, callback, oSettings) {
+                 data.push({ name: 'sKey', value: viewKey });
+
+                 var colvis = ' ';
+                 for (var i = 0; i < oSettings.aoColumns.length; i++) {
+                     if (!oSettings.aoColumns[i].bVisible) {
+                         colvis += i + ',';
+                     }
+                 }
+
+               data.push({ name: 'sColVis', value: colvis});
+              
                 $.ajax({
                     "url": url,
                     "data": data,
@@ -47,6 +65,9 @@
             } 
           
         });
+        var oColVis = new ColVis(oTables.fnSettings());
+      
+
     });                    
 </script>
 

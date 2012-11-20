@@ -21,6 +21,9 @@ namespace GF.Web.Models
             /// </summary>
             public string DisplayName { get; set; }
 
+
+            public bool ShowByDefault { get; set; }
+
             /// <summary>
             ///   Holds the function which returns a string given an
             ///   instance of an object
@@ -32,6 +35,15 @@ namespace GF.Web.Models
                 this.Name = Name;
                 this.DisplayName = DisplayName;
                 this.ValueFunction = ValueFunction;
+                this.ShowByDefault = true;
+            }
+
+            public ColumnDef(string DisplayName, string Name, Func<T, string> ValueFunction, bool ShowByDefault)
+            {
+                this.Name = Name;
+                this.DisplayName = DisplayName;
+                this.ValueFunction = ValueFunction;
+                this.ShowByDefault = ShowByDefault;
             }
          
     }

@@ -24,13 +24,29 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //http://www.datatables.net
+        var viewKey = '@Model.ViewKey';
         $('#orderHistory').dataTable({
-            //"sDom": "rt",        
+            "sDom": 'C<"clear">lfrtip',
             "sPaginationType": "full_numbers",
+            "aoColumnDefs": [
+                { "bVisible": false, "aTargets": [@Model.Cols] }
+            ],
+            "bFilter": false,
             "bProcessing": true,
             "bServerSide": true,
             "sAjaxSource": '@Url.Content("~/Home/GetMaterialAvailability")', 
-            "fnServerData": function (url, data, callback) {
+            "fnServerData": function (url, data, callback, oSettings) {
+                data.push({ name: 'sKey', value: viewKey });
+
+                var colvis = ' ';
+                for (var i = 0; i < oSettings.aoColumns.length; i++) {
+                    if (!oSettings.aoColumns[i].bVisible) {
+                        colvis += i + ',';
+                    }
+                }
+
+                data.push({ name: 'sColVis', value: colvis });
+
                 $.ajax({
                     "url": url,
                     "data": data,

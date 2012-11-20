@@ -13,7 +13,9 @@
           Scripts.Render("~/bundles/datatables");
          --> 
        @Styles.Render("~/Content/themes/base/jquery.dataTables.css")
+           @Styles.Render("~/Content/themes/base/ColVis.css")
        @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+         @Scripts.Render("~/Scripts/ColVis.min.js")
        @Scripts.Render("~/Scripts/TableTools.min.js") 
        @Scripts.Render("~/Scripts/ZeroClipboard.js")  
         @Styles.Render("~/Content/themes/base/TableTools.css");
@@ -31,7 +33,7 @@
                         Hello, <span class="username">@User.Identity.Name</span>!
                     </section>
                     <nav>
-                        <ul id="menu">
+                        <ul id="menu"> 
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ControllerExtensionMethods.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\GuidRoute.cs" />
     <Compile Include="Infrastructure\MyHelpers.cs" />
     <Compile Include="Models\ColumnDef.cs" />
     <Compile Include="Models\MaterialAvailabilityViewModel.cs" />
@@ -156,8 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\themes\base\ColVis.css" />
+    <Content Include="Content\themes\base\ColVisAlt.css" />
     <Content Include="Content\themes\base\demo_table_jui.css" />
     <Content Include="Content\themes\base\images\background.png" />
+    <Content Include="Content\themes\base\images\button.png" />
     <Content Include="Content\themes\base\images\collection.png" />
     <Content Include="Content\themes\base\images\collection_hover.png" />
     <Content Include="Content\themes\base\images\copy.png" />
@@ -248,6 +253,8 @@
     <Content Include="Content\themes\Images\sort_both.png" />
     <Content Include="Content\themes\Images\sort_desc.png" />
     <Content Include="Content\themes\Images\sort_desc_disabled.png" />
+    <Content Include="Scripts\ColVis.js" />
+    <Content Include="Scripts\ColVis.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

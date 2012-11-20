@@ -49,14 +49,21 @@ namespace GF.Web.Controllers
 
  
         public ActionResult HistoryDetailServerSide(int? CustomerID)
-        { 
-            return View(new HistoryDetailViewModel());
+        {
+
+            var model = new HistoryDetailViewModel();
+            string colList = this.GetGuidSession(model.ColumnKey) as string;
+            if (colList == null)
+                colList = model.GetColumnIndexesToBeHidden();
+
+            return View(new HistoryDetailViewModel(this.GetGuid(), colList));
         }
          
         [HttpPost]
         public ActionResult GetOrderRollHistory(DataTable dataTable)
-        {
-            var model = new HistoryDetailViewModel(); 
+        { 
+            var model = new HistoryDetailViewModel();
+            this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
             var orderByClause = model.GetOrderByClause(dataTable);
             IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>(); 
             return GetTableRows<OrderRoll>(dataTable, HistoryDetails, model.Columns); 
@@ -64,7 +71,11 @@ namespace GF.Web.Controllers
 
         public ActionResult MaterialAvailabilityServerSide(int? CustomerID)
         {
-            return View(new MaterialAvailabilityViewModel());
+            var model = new MaterialAvailabilityViewModel();
+            string colList = this.GetGuidSession(model.ColumnKey) as string;
+            if (colList == null)
+                colList = model.GetColumnIndexesToBeHidden(); 
+            return View(new MaterialAvailabilityViewModel(this.GetGuid(), colList));
         }
 
         [HttpPost]
@@ -72,6 +83,7 @@ namespace GF.Web.Controllers
         {
            
             var model = new MaterialAvailabilityViewModel();
+            this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
             var orderByClause = model.GetOrderByClause(dataTable);
             IList<MaterialAvailability> items = _gfRepository.GetMaterialAvailability(CustomerID).OrderBy(orderByClause).ToList<MaterialAvailability>();
             return GetTableRows<MaterialAvailability>(dataTable, items, model.Columns);

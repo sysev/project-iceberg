@@ -14,6 +14,8 @@ namespace GF.Web.Models
     public abstract class ObjectItemViewModel<T>
     {
 
+        public string ViewKey { get; set; }
+        public string Cols { get; set; }
         public abstract IList<ColumnDef<T>> Columns { get; }
         public IList<string> GetColumNames()
         {
@@ -34,6 +36,32 @@ namespace GF.Web.Models
                 OrderByClause.Append(ColumnList[sortItem.Item1] + " " + sortItem.Item2);
             }
             return OrderByClause.ToString();
+        }
+
+        public string GetColumnIndexesToBeHidden()
+        {
+            var sb = new StringBuilder("");
+            int ndx=0;
+            foreach (var column in Columns)
+            {
+                if (!column.ShowByDefault)
+                {
+                    if (sb.Length > 0)
+                        sb.Append(", ");
+                    sb.Append(ndx);
+                }
+                ndx++;
+                
+            }
+            return sb.ToString();
+        }
+
+        public string ColumnKey
+        {
+            get
+            {
+                return "columns_" + this.GetType().ToString();
+            }
         }
     }
 }

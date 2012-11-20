@@ -12,7 +12,7 @@ namespace GF.Web.Models
         {
             bSortables = new List<bool>();
             bSearchables = new List<bool>();
-            sSearchs = new List<string>();
+            sSearchs = new List<string>(); 
             bEscapeRegexs = new List<bool>();
             iSortCols = new List<int>();
             sSortDirs = new List<DataTableSortDirection>();
@@ -82,6 +82,9 @@ namespace GF.Web.Models
         /// Direction to be sorted - "desc" or "asc". Note that the prefix for this variable is wrong in 1.5.x where iSortDir_(int) was used)
         /// </summary>
         public IList<DataTableSortDirection> sSortDirs { get; set; }
+
+        public string sColVis { get; set; }
+        public string sKey { get; set; }
 
         private IList<Tuple<int, string>> PossibleSortColumns
         {
