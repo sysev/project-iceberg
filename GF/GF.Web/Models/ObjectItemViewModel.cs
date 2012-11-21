@@ -13,7 +13,7 @@ namespace GF.Web.Models
     /// <typeparam name="T"></typeparam>
     public abstract class ObjectItemViewModel<T>
     {
-
+         
         public string ViewKey { get; set; }
         public string Cols { get; set; }
         public abstract IList<ColumnDef<T>> Columns { get; }
@@ -62,6 +62,11 @@ namespace GF.Web.Models
             {
                 return "columns_" + this.GetType().ToString();
             }
+        }
+
+        public ObjectItemViewModel()
+        {
+            // TODO: Complete member initialization
         }
     }
 }
