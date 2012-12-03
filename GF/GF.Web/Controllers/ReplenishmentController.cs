@@ -37,7 +37,7 @@ namespace GF.Web.Controllers
             String ipAddress = "rulefree10"; // can be any http or https address
             String putQueue = "Q1";
             int timeout = 1500;
-            int charset = 15;
+            int charset = 500;
             int portNum = 1414; // default port
 
             MQAdapter.MQAdapter mqAdapter = new MQAdapter.MQAdapter(queueManagerName, channelName, ipAddress,
