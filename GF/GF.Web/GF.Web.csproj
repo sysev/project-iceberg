@@ -138,6 +138,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ControllerExtensionMethods.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReplenishmentController.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
     <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
@@ -314,6 +315,10 @@
     <ProjectReference Include="..\GF.Data\GF.Data.csproj">
       <Project>{cbf5b4a6-c515-47d8-b4ba-7cea13d36d22}</Project>
       <Name>GF.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GF.MQAdapter\GF.MQAdapter.csproj">
+      <Project>{65eb3dcf-74a1-4a67-97dd-824eb0493758}</Project>
+      <Name>GF.MQAdapter</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
