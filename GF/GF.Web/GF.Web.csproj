@@ -147,12 +147,18 @@
     </Compile>
     <Compile Include="Infrastructure\GuidRoute.cs" />
     <Compile Include="Infrastructure\MyHelpers.cs" />
+    <Compile Include="Models\Criteria.cs" />
+    <Compile Include="Models\DataTableDataMember.cs" />
+    <Compile Include="Models\EmptyCriteria.cs" />
+    <Compile Include="Models\OrderHistoryCriteria.cs" />
     <Compile Include="Models\ColumnDef.cs" />
     <Compile Include="Models\MaterialAvailabilityViewModel.cs" />
     <Compile Include="Models\DataTable.cs" />
     <Compile Include="Models\DataTableResult.cs" />
     <Compile Include="Models\HistoryDetailViewModel.cs" />
     <Compile Include="Models\ObjectItemViewModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\ReportResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\GFIdentity.cs" />
     <Compile Include="Security\GFPrincipal.cs" />
