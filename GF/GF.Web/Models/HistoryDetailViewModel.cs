@@ -7,7 +7,7 @@ using GF.Data;
 
 namespace GF.Web.Models
 {
-    public class HistoryDetailViewModel : ObjectItemViewModel<OrderRoll>
+    public class HistoryDetailViewModel : ObjectItemViewModel<OrderHistoryCriteria, OrderRoll>
     {
         public HistoryDetailViewModel() { }
         public HistoryDetailViewModel(string key, string Cols)
@@ -15,6 +15,8 @@ namespace GF.Web.Models
             this.ViewKey = key;
             this.Cols = Cols;
         }
+
+        public OrderHistoryCriteria criteria { get; set; }
          
         private static IList<ColumnDef<OrderRoll>> ColumnDefs = 
              new List<ColumnDef<OrderRoll>>(){

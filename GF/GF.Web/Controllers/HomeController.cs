@@ -60,13 +60,15 @@ namespace GF.Web.Controllers
         }
          
         [HttpPost]
-        public ActionResult GetOrderRollHistory(DataTable dataTable)
+        public ActionResult GetOrderRollHistory(OrderHistoryCriteria criteria, DataTable dataTable)
         { 
             var model = new HistoryDetailViewModel();
             this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
             var orderByClause = model.GetOrderByClause(dataTable);
-            IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>(); 
-            return GetTableRows<OrderRoll>(dataTable, HistoryDetails, model.Columns); 
+            IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>();
+
+            //var criteria = new OrderHistoryCriteria();
+            return GetResults<OrderRoll>(criteria, dataTable, HistoryDetails, model.Columns); 
         }
 
         public ActionResult MaterialAvailabilityServerSide(int? CustomerID)
@@ -86,11 +88,11 @@ namespace GF.Web.Controllers
             this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
             var orderByClause = model.GetOrderByClause(dataTable);
             IList<MaterialAvailability> items = _gfRepository.GetMaterialAvailability(CustomerID).OrderBy(orderByClause).ToList<MaterialAvailability>();
-            return GetTableRows<MaterialAvailability>(dataTable, items, model.Columns);
+            var criteria = new EmptyCriteria();
+            return GetResults<MaterialAvailability>(criteria, dataTable, items, model.Columns);
         }
 
-
-        private DataTableResult GetTableRows<T>(DataTable dataTable, IList<T> Objects, IList<ColumnDef<T>> Columns)
+        private ReportResult GetResults<T>(Criteria criteria, DataTable dataTable, IList<T> Objects, IList<ColumnDef<T>> Columns)
         {
             var end = dataTable.iDisplayStart + dataTable.iDisplayLength;
             if (end > Objects.Count - 1)
@@ -108,11 +110,11 @@ namespace GF.Web.Controllers
                 }
                 table.Add(row);
             }
+            var dataTableDataMember = new DataTableDataMember(dataTable, Objects.Count, Objects.Count, table);
 
-           var result = new DataTableResult(dataTable, Objects.Count, Objects.Count, table);
-           result.ContentEncoding = Encoding.UTF8;
-           return result;
-
+            var result = new ReportResult(new ReportModel(criteria, dataTableDataMember));
+            result.ContentEncoding = Encoding.UTF8;
+            return result;
         }
 
          

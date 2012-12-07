@@ -15,7 +15,7 @@ namespace GF.Data
     public partial class MaterialAvailability
     {
         public string MaterialNumber { get; set; }
-        public int QuanityInStock { get; set; }
+        public int QuantityInStock { get; set; }
         public int RollWeight { get; set; }
     }
 }

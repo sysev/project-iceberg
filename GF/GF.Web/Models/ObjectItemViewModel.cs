@@ -11,11 +11,12 @@ namespace GF.Web.Models
     ///   aspects of each object view model
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class ObjectItemViewModel<T>
+    public abstract class ObjectItemViewModel<C, T>
     {
          
         public string ViewKey { get; set; }
         public string Cols { get; set; }
+        public C Criteria { get; set; }
         public abstract IList<ColumnDef<T>> Columns { get; }
         public IList<string> GetColumNames()
         {

@@ -8,8 +8,20 @@
 <h2>Order History (Server-side)</h2>
 
 <div id="dynamic">
+
+    <div id="criteria">
+        @Html.LabelFor(m => m.Criteria.MaterialNumber, "Material Number")
+        @Html.TextBoxFor(m => m.Criteria.MaterialNumber)
+        @Html.LabelFor(m => m.Criteria.RollNumber, "Roll Number")
+        @Html.TextBoxFor(m => m.Criteria.RollNumber)
+        @Html.LabelFor(m => m.Criteria.CustomerPartNumber, "Customer Part Number")
+        @Html.TextBoxFor(m => m.Criteria.CustomerPartNumber)
+        @Html.LabelFor(m => m.Criteria.CustomerPONumber, "Customer PO Number")
+        @Html.TextBoxFor(m => m.Criteria.CustomerPONumber)
+    </div>
+
     <div>@Model.ViewKey @Model.Cols</div>
-    <table id="orderHistory" width="100%">
+    <table id="orderHistory" style="width:100%;">
         <thead>
             <tr>
                 @foreach(var item in Model.Columns){
@@ -37,22 +49,25 @@
             "bServerSide": true,
             "bFilter": false, 
             "sAjaxSource": '@Url.Content("~/Home/GetOrderRollHistory")',
-             "fnServerData": function (url, data, callback, oSettings) {
-                 data.push({ name: 'sKey', value: viewKey });
-
+           "fnServerData": function (url, data, callback, oSettings) {
                  var colvis = ' ';
                  for (var i = 0; i < oSettings.aoColumns.length; i++) {
                      if (!oSettings.aoColumns[i].bVisible) {
                          colvis += i + ',';
                      }
                  }
+ 
+                 data.push({ name: 'sKey', value: viewKey },
+                   { name: 'sColVis', value: colvis },
+                   { name: 'materialNumber', value: $('[name="Criteria.MaterialNumber"]').val() },
+                   { name: 'rollNumber', value: $('[name="Criteria.RollNumber"]').val() },
+                   { name: 'customerPartNumber', value: $('[name="Criteria.CustomerPartNumber"]').val() },
+                   { name: 'customerPONumber', value: $('[name="Criteria.CustomerPONumber"]').val() });
 
-               data.push({ name: 'sColVis', value: colvis});
-              
                 $.ajax({
                     "url": url,
                     "data": data,
-                    "success": callback,
+                    "success": function (response, status) { console.log(response.criteria); callback(response.dataTable); },
                     "contentType": "application/x-www-form-urlencoded; charset=utf-8",
                     "dataType": "json",
                     "type": "POST",
@@ -63,11 +78,8 @@
                     }
                 });
             } 
-          
         });
         var oColVis = new ColVis(oTables.fnSettings());
-      
-
     });                    
 </script>
 

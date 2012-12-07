@@ -7,7 +7,7 @@ using GF.Data;
 
 namespace GF.Web.Models
 {
-    public class MaterialAvailabilityViewModel : ObjectItemViewModel<MaterialAvailability>
+    public class MaterialAvailabilityViewModel : ObjectItemViewModel<EmptyCriteria, MaterialAvailability>
     {
          public MaterialAvailabilityViewModel() { }
          public MaterialAvailabilityViewModel(string key, string Cols)
@@ -19,7 +19,7 @@ namespace GF.Web.Models
         private static IList<ColumnDef<MaterialAvailability>> ColumnDefs =
              new List<ColumnDef<MaterialAvailability>>(){ 
                     new ColumnDef<MaterialAvailability>("Material Number", "MaterialNumber", p => p.MaterialNumber),
-                    new ColumnDef<MaterialAvailability>("Quanity In Stock", "QuanityInStock", p => p.QuanityInStock.ToString()),
+                    new ColumnDef<MaterialAvailability>("Quantity In Stock", "QuantityInStock", p => p.QuantityInStock.ToString()),
                     new ColumnDef<MaterialAvailability>("Roll Weight", "RollWeight", p => p.RollWeight.ToString(), false), 
                 };
 

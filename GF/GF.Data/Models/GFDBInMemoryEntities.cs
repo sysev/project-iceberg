@@ -62,7 +62,7 @@ namespace GF.Data.Models
             return new MaterialAvailability()
             {
                MaterialNumber = num,
-               QuanityInStock = val1 % 10,
+               QuantityInStock = val1 % 10,
                RollWeight = val2 % 9 
             };
         }
