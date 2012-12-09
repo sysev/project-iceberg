@@ -6,19 +6,23 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/jquery.dataTables.css")
+        @Styles.Render("~/Content/themes/base/ColVis.css")
+        @Styles.Render("~/Content/themes/base/TableTools.css");
+
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery") 
         <!-- RPH -- For some reason, this render bundle doesn't work. 
             So I am adding datatables stuff old school
           Scripts.Render("~/bundles/datatables");
          --> 
-       @Styles.Render("~/Content/themes/base/jquery.dataTables.css")
-           @Styles.Render("~/Content/themes/base/ColVis.css")
-       @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
-         @Scripts.Render("~/Scripts/ColVis.min.js")
-       @Scripts.Render("~/Scripts/TableTools.min.js") 
-       @Scripts.Render("~/Scripts/ZeroClipboard.js")  
-        @Styles.Render("~/Content/themes/base/TableTools.css");
+        @Scripts.Render("~/Scripts/jquery.json-2.4.min.js")
+        @Scripts.Render("~/Scripts/jquery.cookie.js")
+        @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+        @Scripts.Render("~/Scripts/ColVis.min.js")
+        @Scripts.Render("~/Scripts/TableTools.min.js") 
+        @Scripts.Render("~/Scripts/ZeroClipboard.js")  
+        
         
         
     </head>

@@ -37,6 +37,17 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //http://www.datatables.net
+        var loadCookie = function () {
+            var cookie = $.secureEvalJSON($.cookie('historyDetails'));
+            if (cookie !== null) {
+                console.log(cookie);
+                $('[name = "Criteria.MaterialNumber"]').val(cookie.materialNumber);
+                $('[name = "Criteria.RollNumber"]').val(cookie.rollNumber);
+                $('[name = "Criteria.CustomerPartNumber"]').val(cookie.customerPartNumber);
+                $('[name = "Criteria.CustomerPONumber"]').val(cookie.customerPONumber);
+            }
+       }
+       loadCookie();
        var viewKey = '@Model.ViewKey';
        var oTables; 
        oTables = $('#orderHistory').dataTable({
@@ -47,27 +58,38 @@
             ],
             "bProcessing": true, 
             "bServerSide": true,
+            "bStateSave":true,
             "bFilter": false, 
             "sAjaxSource": '@Url.Content("~/Home/GetOrderRollHistory")',
            "fnServerData": function (url, data, callback, oSettings) {
-                 var colvis = ' ';
-                 for (var i = 0; i < oSettings.aoColumns.length; i++) {
-                     if (!oSettings.aoColumns[i].bVisible) {
-                         colvis += i + ',';
-                     }
-                 }
- 
-                 data.push({ name: 'sKey', value: viewKey },
-                   { name: 'sColVis', value: colvis },
-                   { name: 'materialNumber', value: $('[name="Criteria.MaterialNumber"]').val() },
-                   { name: 'rollNumber', value: $('[name="Criteria.RollNumber"]').val() },
-                   { name: 'customerPartNumber', value: $('[name="Criteria.CustomerPartNumber"]').val() },
-                   { name: 'customerPONumber', value: $('[name="Criteria.CustomerPONumber"]').val() });
+               var colvis = ' ';
+               for (var i = 0; i < oSettings.aoColumns.length; i++) {
+                   if (!oSettings.aoColumns[i].bVisible) {
+                       colvis += i + ',';
+                   }
+               }
+               var criteria = {
+                   materialNumber: $('[name="Criteria.MaterialNumber"]').val(),
+                   rollNumber: $('[name="Criteria.RollNumber"]').val(),
+                   customerPartNumber: $('[name="Criteria.CustomerPartNumber"]').val(),
+                   customerPONumber: $('[name="Criteria.CustomerPONumber"]').val()
+               };
+               data.push({ name: 'sKey', value: viewKey },
+              { name: 'sColVis', value: colvis });
+               
+               $.each(criteria, function(name, value){
+                   data.push({ name: name, value: value });
+               });
+
+                 $.cookie('historyDetails', $.toJSON(criteria));
 
                 $.ajax({
                     "url": url,
                     "data": data,
-                    "success": function (response, status) { console.log(response.criteria); callback(response.dataTable); },
+                    "success": function (response, status) {
+                        console.log(response.criteria);
+                        callback(response.dataTable);
+                    },
                     "contentType": "application/x-www-form-urlencoded; charset=utf-8",
                     "dataType": "json",
                     "type": "POST",
