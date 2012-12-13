@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using GF.Web.Infrastructure
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -6,22 +8,27 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/font.css")
         @Styles.Render("~/Content/themes/base/jquery.dataTables.css")
         @Styles.Render("~/Content/themes/base/ColVis.css")
-        @Styles.Render("~/Content/themes/base/TableTools.css");
+        @Styles.Render("~/Content/themes/base/TableTools.css")
+        @Styles.Render("~/Content/themes/base/jQRangeSlider/glatfelter.css")
 
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery") 
+        @Scripts.Render("~/bundles/jqueryui") 
         <!-- RPH -- For some reason, this render bundle doesn't work. 
             So I am adding datatables stuff old school
-          Scripts.Render("~/bundles/datatables");
+          Scripts.Render("~/bundles/datatables")
          --> 
         @Scripts.Render("~/Scripts/jquery.json-2.4.min.js")
         @Scripts.Render("~/Scripts/jquery.cookie.js")
+        @Scripts.Render("~/Scripts/jQDateRangeSlider-min.js")
         @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
         @Scripts.Render("~/Scripts/ColVis.min.js")
         @Scripts.Render("~/Scripts/TableTools.min.js") 
         @Scripts.Render("~/Scripts/ZeroClipboard.js")  
+        @Scripts.Render("~/Scripts/DateUtil.js")  
         
         
         
@@ -29,23 +36,27 @@
     <body>
         <header>
             <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                <div class="clear-fix">
+                    <div class="float-left">
+                        <p class="site-title">
+                            @Html.ActionImage("Index", "Home", null,"~/Images/Glatfelter_Logo.gif", "Home")
+                        </p>
+                    </div>
+                    <div class="float-right">
+                        <section id="login">
+                            <span class="username">@User.Identity.Name</span>
+                        </section>
+                    </div>
                 </div>
-                <div class="float-right">
-                    <section id="login">
-                        Hello, <span class="username">@User.Identity.Name</span>!
-                    </section>
-                    <nav>
-                        <ul id="menu"> 
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Materials", "MaterialAvailabilityServerSide", "Home")</li>
-                            <li>@Html.ActionLink("History", "HistoryDetailServerSide", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
+                <nav>
+                    <ul id="menu"> 
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Materials", "MaterialAvailabilityServerSide", "Home")</li>
+                        <li>@Html.ActionLink("History", "HistoryDetailServerSide", "Home")</li>
+                    </ul>
+                </nav>                
             </div>
         </header>
         <div id="body">

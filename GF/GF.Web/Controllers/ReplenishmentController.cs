@@ -40,10 +40,11 @@ namespace GF.Web.Controllers
             int charset = 500;
             int portNum = 1414; // default port
 
-            MQAdapter.MQAdapter mqAdapter = new MQAdapter.MQAdapter(queueManagerName, channelName, ipAddress,
+            /*MQAdapter.MQAdapter mqAdapter = new MQAdapter.MQAdapter(queueManagerName, channelName, ipAddress,
                 putQueue, timeout, charset, portNum);
             String responseString = mqAdapter.postMQRequestMessage(messageText);
-            return responseString;
+            return responseString;*/
+            return "";
         }
 
     }

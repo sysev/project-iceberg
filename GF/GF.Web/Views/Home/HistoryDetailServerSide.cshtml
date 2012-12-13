@@ -1,26 +1,85 @@
 ﻿@using GF.Web.Models
+@using GF.Web.Infrastructure
+
 @model HistoryDetailViewModel
 
 @{
     ViewBag.Title = "History Detail Server Side";
 }
 
-<h2>Order History (Server-side)</h2>
+<h2 class="report">History Detail Report</h2>
 
-<div id="dynamic">
-
-    <div id="criteria">
-        @Html.LabelFor(m => m.Criteria.MaterialNumber, "Material Number")
-        @Html.TextBoxFor(m => m.Criteria.MaterialNumber)
-        @Html.LabelFor(m => m.Criteria.RollNumber, "Roll Number")
-        @Html.TextBoxFor(m => m.Criteria.RollNumber)
-        @Html.LabelFor(m => m.Criteria.CustomerPartNumber, "Customer Part Number")
-        @Html.TextBoxFor(m => m.Criteria.CustomerPartNumber)
-        @Html.LabelFor(m => m.Criteria.CustomerPONumber, "Customer PO Number")
-        @Html.TextBoxFor(m => m.Criteria.CustomerPONumber)
+<div class="panel criteria-panel">
+    <h3 class="report">Report Criteria</h3>
+    <div class="two-column-layout panel">
+        <div class="column">
+            <div class="row">
+                @Html.LabelFor(m => m.Criteria.MaterialNumber, "Material Number:")
+                <div class="input">
+                    @Html.TextBoxFor(m => m.Criteria.MaterialNumber)
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Criteria.CustomerPartNumber, "Customer Part Number:")
+                <div class="input">
+                    @Html.TextBoxFor(m => m.Criteria.CustomerPartNumber)
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="row">
+                @Html.LabelFor(m => m.Criteria.RollNumber, "Roll Number:")
+                <div class="input">
+                    @Html.TextBoxFor(m => m.Criteria.RollNumber)
+                </div>
+            </div>
+            <div class="row">
+                @Html.LabelFor(m => m.Criteria.CustomerPONumber, "Customer PO Number:")
+                <div class="input">
+                    @Html.TextBoxFor(m => m.Criteria.CustomerPONumber)
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="panel">
+        <div class="order-status horizontal-layout clear-fix">
+            <div class="layout-item">
+                @Html.LabelFor(m => m.Criteria.OrderStatus, "Ordered:")
+                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "ordered")
+            </div>
+            <div class="layout-item">
+                @Html.LabelFor(m => m.Criteria.OrderStatus, "Shipped:")
+                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "shipped")
+            </div>
+            <div class="layout-item">
+                @Html.LabelFor(m => m.Criteria.OrderStatus, "Received:")
+                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "received")
+            </div>
+            <div class="layout-item">
+                @Html.LabelFor(m => m.Criteria.OrderStatus, "Used:")
+                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "used")
+            </div>
+            <div class="layout-item">
+                @Html.LabelFor(m => m.Criteria.OrderStatus, "Last Physical Inventory")
+                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "lastPhysicalInventory")
+            </div>
+        </div>
+        
+        <div class="date-range-container">
+            <div class="date-range-slider"></div>
+            <div class="button-container horizontal-layout clear-fix">
+                <input type="button" class="small-button" value="2011" />
+                <input type="button" class="small-button" value="2012" />
+                <input type="button" class="small-button" value="Nov 2012" />
+                <input type="button" class="small-button" value="Dec 2012" />
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div>@Model.ViewKey @Model.Cols</div>
+<div class="panel">
+    <h3 class="report">Results</h3>
+    
     <table id="orderHistory" style="width:100%;">
         <thead>
             <tr>
@@ -32,10 +91,35 @@
         <tbody></tbody>
         <tfoot></tfoot>
     </table>
+    <br /><br /><br />
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var today = new Date().resetTime();
+        var lastMonth = today.clone().add('M', -1);
+        var lastYear = today.clone().add('y', -1);
+        $('.date-range-slider').dateRangeSlider({
+            step:{ days: 1 },
+            bounds: {
+                min: lastYear,
+                max: today
+            },
+            defaultValues:{
+                min: lastMonth,
+                max: today
+            },
+            formatter:function(val){
+                var days = val.getDate(),
+                  month = val.getMonth() + 1,
+                  year = val.getYear() + 1900;
+                return month + "/" + days + "/" + year;
+            }
+        }).bind("valuesChanged", function (e, data) {
+            console.log(data);
+        });
+
+
         //http://www.datatables.net
         var loadCookie = function () {
             var cookie = $.secureEvalJSON($.cookie('historyDetails'));
@@ -61,6 +145,7 @@
             "bStateSave":true,
             "bFilter": false, 
             "sAjaxSource": '@Url.Content("~/Home/GetOrderRollHistory")',
+            "oColVis": { "buttonText": '+/- Columns' },
            "fnServerData": function (url, data, callback, oSettings) {
                var colvis = ' ';
                for (var i = 0; i < oSettings.aoColumns.length; i++) {
@@ -100,8 +185,10 @@
                     }
                 });
             } 
-        });
+       });
+
         var oColVis = new ColVis(oTables.fnSettings());
+        $('.ColVis_Button').addClass('small-button');
     });                    
 </script>
 

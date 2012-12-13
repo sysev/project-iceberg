@@ -24,5 +24,11 @@ namespace GF.Web.Models
 
         [DataMember(Name = "customerPONumber")]
         public string CustomerPONumber { get; set; }
+
+        [DataMember(Name = "orderStatus")]
+        public bool OrderStatus { get; set; }
+
+        
+
     }
 }

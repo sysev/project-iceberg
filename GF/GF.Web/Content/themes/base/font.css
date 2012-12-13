@@ -1,0 +1,15 @@
+﻿@font-face {
+   font-family: 'MyriadPro Light';
+   src: url('MyriadPro-Light.otf');
+   src: local('MyriadPro Light'), local('MyriadPro-Light'), url('MyriadPro-Light.otf') format('opentype');
+   font-weight: 600;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'MyriadPro Regular';
+   src: url('MyriadPro-Regular.otf');
+   src: local('MyriadPro Regular'), local('MyriadPro-Regular'), url('MyriadPro-Regular.otf') format('opentype');
+   font-weight: 900;
+   font-style: normal;
+}

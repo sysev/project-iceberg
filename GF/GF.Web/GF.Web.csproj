@@ -195,6 +195,12 @@
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\themes\base\images\xls.png" />
     <Content Include="Content\themes\base\images\xls_hover.png" />
+    <Content Include="Content\themes\base\jQRangeSlider\classic.css" />
+    <Content Include="Content\themes\base\jQRangeSlider\glatfelter.css" />
+    <Content Include="Content\themes\base\jQRangeSlider\icons\.gitignore" />
+    <Content Include="Content\themes\base\jQRangeSlider\icons\label.png" />
+    <Content Include="Content\themes\base\jQRangeSlider\icons\resultset_next.png" />
+    <Content Include="Content\themes\base\jQRangeSlider\icons\resultset_previous.png" />
     <Content Include="Content\themes\base\jquery-ui.css" />
     <Content Include="Content\themes\base\jquery.dataTables.css" />
     <Content Include="Content\themes\base\jquery.ui.accordion.css" />
@@ -239,6 +245,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\TableTools.css" />
     <Content Include="Content\themes\base\TableTools_JUI.css" />
+    <Content Include="Content\themes\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\themes\redmond\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Content\themes\redmond\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\Images\Sorting icons.psd" />
@@ -246,6 +269,7 @@
     <Content Include="Content\themes\base\images\psd\copy document.psd" />
     <Content Include="Content\themes\base\images\psd\file_types.psd" />
     <Content Include="Content\themes\base\images\psd\printer.psd" />
+    <Content Include="Content\themes\base\MyriadPro-Regular.otf" />
     <None Include="Properties\PublishProfiles\Copy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Content\themes\Images\back_disabled.png" />
@@ -261,13 +285,18 @@
     <Content Include="Content\themes\Images\sort_desc.png" />
     <Content Include="Content\themes\Images\sort_desc_disabled.png" />
     <Content Include="Content\themes\Images\glatfelter_logo.png" />
+    <Content Include="Images\Glatfelter_Logo.gif" />
     <Content Include="Scripts\ColVis.js" />
     <Content Include="Scripts\ColVis.min.js" />
+    <Content Include="Scripts\DateUtil.js" />
+    <Content Include="Scripts\jQDateRangeSlider-min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.custom.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.json-2.4.min.js" />
@@ -282,6 +311,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\TableTools.min.js" />
     <Content Include="Scripts\ZeroClipboard.js" />
+    <Content Include="Content\themes\base\font.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -316,6 +346,7 @@
     <Content Include="Views\Home\HistoryDetail.cshtml" />
     <Content Include="Views\Home\HistoryDetailServerSide.cshtml" />
     <Content Include="Views\Home\MaterialAvailabilityServerSide.cshtml" />
+    <Content Include="Content\themes\base\MyriadPro-Light.otf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,10 +355,6 @@
     <ProjectReference Include="..\GF.Data\GF.Data.csproj">
       <Project>{cbf5b4a6-c515-47d8-b4ba-7cea13d36d22}</Project>
       <Name>GF.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GF.MQAdapter\GF.MQAdapter.csproj">
-      <Project>{65eb3dcf-74a1-4a67-97dd-824eb0493758}</Project>
-      <Name>GF.MQAdapter</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
