@@ -147,6 +147,9 @@
     </Compile>
     <Compile Include="Infrastructure\GuidRoute.cs" />
     <Compile Include="Infrastructure\MyHelpers.cs" />
+    <Compile Include="Models\InventoryAgingViewModel.cs" />
+    <Compile Include="Models\InventoryStatusViewModel.cs" />
+    <Compile Include="Models\HistorySummaryViewModel.cs" />
     <Compile Include="Models\Criteria.cs" />
     <Compile Include="Models\DataTableDataMember.cs" />
     <Compile Include="Models\EmptyCriteria.cs" />
@@ -285,7 +288,12 @@
     <Content Include="Content\themes\Images\sort_desc.png" />
     <Content Include="Content\themes\Images\sort_desc_disabled.png" />
     <Content Include="Content\themes\Images\glatfelter_logo.png" />
+    <Content Include="Images\csv.png" />
+    <Content Include="Images\excel.png" />
     <Content Include="Images\Glatfelter_Logo.gif" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\help2.png" />
+    <Content Include="Images\print.png" />
     <Content Include="Scripts\ColVis.js" />
     <Content Include="Scripts\ColVis.min.js" />
     <Content Include="Scripts\DateUtil.js" />
@@ -343,10 +351,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="packages.config" />
     <None Include="readme.txt" />
-    <Content Include="Views\Home\HistoryDetail.cshtml" />
-    <Content Include="Views\Home\HistoryDetailServerSide.cshtml" />
-    <Content Include="Views\Home\MaterialAvailabilityServerSide.cshtml" />
+    <Content Include="Views\Home\Archive\HistoryDetail.cshtml" />
+    <Content Include="Views\Home\HistoryDetailReport.cshtml" />
+    <Content Include="Views\Home\HistorySummaryReport.cshtml" />
     <Content Include="Content\themes\base\MyriadPro-Light.otf" />
+    <Content Include="Views\Home\InventoryStatusReport.cshtml" />
+    <Content Include="Views\Home\InventoryAgingReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,9 +25,6 @@ a {
         color: #333;
     }
 
-    a:hover {
-        background-color: #c7d1d6;
-    }
 
 header, footer, hgroup,
 nav, section {
@@ -249,7 +246,18 @@ input {
 }
 
 .row .input input {
-    width:100%;
+    width: 80%;
+}
+
+.row .input a:hover {
+    background:none !important;
+}
+
+.row .input img {
+    width: 21px;
+    height: 21px;
+    position: relative;
+    top:5px;
 }
 
 .horizontal-layout .layout-item {
@@ -276,7 +284,7 @@ input {
 
 .small-button
 {
-    padding:2px 4px !important;
+    padding:4px 6px !important;
     font-size:.8em;
 }
 
@@ -285,6 +293,18 @@ input {
     margin:10px 0 0 18px;
 }
 
+.table-options {
+    margin: 4px 0 0 25px;
+    float: left;
+    padding: 0.5em;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #C5C199;
+}
+
+.table-options a {
+    margin: 0 0.5em;
+}
 
 /* featured */
 .featured {
@@ -531,30 +551,24 @@ input[type="button"],
 button {
     cursor: pointer;
     width: auto;
-	box-shadow:inset 0px 1px 1px 0px #e7e3bb;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #94bbc2), color-stop(1, #428d97) );
-	background:-moz-linear-gradient( center top, #94bbc2 5%, #428d97 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#94bbc2', endColorstr='#428d97');
-	background-color:#94bbc2;
+    background:#94BBC2;
+	background-color:#007B83;
 	border-radius:4px;
-	border:1px solid #007a83;
+	border:none;
 	display:inline-block;
-	color:#000333;
-	font-weight:bold;
+	color:#FFFFFF;
+	font-weight:normal;
 	padding:5px 8px;
 	text-decoration:none;
-    -moz-box-shadow:inset 0px 1px 1px 0px #e7e3bb;
-	-webkit-box-shadow:inset 0px 1px 1px 0px #e7e3bb;	
     -moz-border-radius:4px;
 	-webkit-border-radius:4px;
 }
 
 
 input[type="button"]:hover,
-input[type="submit"]:hover {
-    background:none;
-	background-color:#94bbc2;
-    filter:initial;
+input[type="submit"]:hover,
+button:hover {
+	background-color:#32949b;
 }
 
 
@@ -637,41 +651,41 @@ th {
     padding-left: 0;
 }
 
-    th a {
-        display: block;
-        position: relative;
-    }
+th a {
+    display: block;
+    position: relative;
+}
 
-    th a:link, th a:visited, th a:active, th a:hover {
-        color: #333;
-        font-weight: 600;
-        text-decoration: none;
-        padding: 0;
-    }
+th a:link, th a:visited, th a:active, th a:hover {
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0;
+}
 
-    th a:hover {
-        color: #000;
-    }
+th a:hover {
+    color: #000;
+}
 
-    th.asc a, th.desc a {
-        margin-right: .75em;
-    }
+th.asc a, th.desc a {
+    margin-right: .75em;
+}
 
-    th.asc a:after, th.desc a:after {
-        display: block;
-        position: absolute;
-        right: 0em;
-        top: 0;
-        font-size: 0.75em;
-    }
+th.asc a:after, th.desc a:after {
+    display: block;
+    position: absolute;
+    right: 0em;
+    top: 0;
+    font-size: 0.75em;
+}
 
-    th.asc a:after {
-        content: '▲';
-    }
+th.asc a:after {
+    content: '▲';
+}
 
-    th.desc a:after {
-        content: '▼';
-    }
+th.desc a:after {
+    content: '▼';
+}
 
 td {
     padding: 0.25em 2em 0.25em 0em;

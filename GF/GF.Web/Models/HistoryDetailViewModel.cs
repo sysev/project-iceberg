@@ -20,12 +20,12 @@ namespace GF.Web.Models
          
         private static IList<ColumnDef<OrderRoll>> ColumnDefs = 
              new List<ColumnDef<OrderRoll>>(){
-                    new ColumnDef<OrderRoll>("Roll #", "RollNumber", p => p.RollNumber),
-                    new ColumnDef<OrderRoll>("Material #", "MaterialNumber", p => p.MaterialNumber),
-                    new ColumnDef<OrderRoll>("Part #", "CustomerPartNumber", p => p.CustomerPartNumber),
-                    new ColumnDef<OrderRoll>("Material Desc.", "MaterialDescription", p => "???"),
-                    new ColumnDef<OrderRoll>("Weight", "RollWeight", p => p.RollWeight.ToString()),
-                    new ColumnDef<OrderRoll>("Status", "OrderStatus", p => 
+                    new ColumnDef<OrderRoll>("Roll Num", "RollNumber", p => p.RollNumber),
+                    new ColumnDef<OrderRoll>("Material Num", "MaterialNumber", p => p.MaterialNumber),
+                    new ColumnDef<OrderRoll>("Customer Part Num", "CustomerPartNumber", p => p.CustomerPartNumber),
+                    new ColumnDef<OrderRoll>("Material Desc", "MaterialDescription", p => "???"),
+                    new ColumnDef<OrderRoll>("Wt", "RollWeight", p => p.RollWeight.ToString()),
+                    new ColumnDef<OrderRoll>("Stat", "OrderStatus", p => 
                         (p.UsedDate != null) ? "USED" : (p.ReceivedDate != null) ? "RECEIVED" : (p.ShippedDate != null) ? "SHIPPED" : (p.OrderDate != null) ? "ORDERED" : ""
                     ),
                     new ColumnDef<OrderRoll>("Date Ordered", "OrderDate", p => p.OrderDate.ToString("d")),
@@ -33,7 +33,7 @@ namespace GF.Web.Models
                     new ColumnDef<OrderRoll>("Date Received", "ReceivedDate", p => p.ReceivedDate.ToString("d")),
                     new ColumnDef<OrderRoll>("Last Physical Inventory", "LastPhysicalDate", p => p.LastPhysicalDate.ToString("d")),
                     new ColumnDef<OrderRoll>("Date Used", "UsedDate", p => p.UsedDate.ToString("d")),
-                    new ColumnDef<OrderRoll>("PO #", "CustomerPONumber", p => p.CustomerPONumber)
+                    new ColumnDef<OrderRoll>("PO Num", "CustomerPONumber", p => p.CustomerPONumber)
                 };
 
         public override IList<ColumnDef<OrderRoll>> Columns { get { return ColumnDefs; } }

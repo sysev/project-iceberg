@@ -111,7 +111,7 @@
             <PropertyRef Name="MaterialNumber" />
           </Key>
           <Property Name="MaterialNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="QuanityInStock" Type="Int32" Nullable="false" />
+          <Property Name="QuantityInStock" Type="Int32" Nullable="false" />
           <Property Name="RollWeight" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderRoll">
@@ -171,7 +171,7 @@
             <EntityTypeMapping TypeName="GFDBModel.MaterialAvailability">
               <MappingFragment StoreEntitySet="MaterialAvailability">
                 <ScalarProperty Name="MaterialNumber" ColumnName="MaterialNumber" />
-                <ScalarProperty Name="QuanityInStock" ColumnName="QuanityInStock" />
+                <ScalarProperty Name="QuantityInStock" ColumnName="QuanityInStock" />
                 <ScalarProperty Name="RollWeight" ColumnName="RollWeight" />
               </MappingFragment>
             </EntityTypeMapping>
