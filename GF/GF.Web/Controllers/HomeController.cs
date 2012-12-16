@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using GF.Data;
 using GF.Data.Helpers;
 using GF.Data.Models;
+using GF.Web.Infrastructure;
 using GF.Web.Models;
 using GF.Web.Security;
 
@@ -90,6 +92,32 @@ namespace GF.Web.Controllers
             //var criteria = new OrderHistoryCriteria();
             return GetResults<OrderRoll>(criteria, dataTable, HistoryDetails, model.Columns); 
         }
+
+
+        public ActionResult ExportToXml()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetXMLResult(model.AsKeyValuePairList());
+        }
+
+        
+        public ActionResult ExportToCSV()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetCSVResult(model.AsTable(true));
+        }
+
+        public ActionResult ExportToPDF()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return File(ExportResultHelper.GetPDF(model.AsTable(true)), "application/pdf", "Report.pdf");
+           
+        }
+       
+
 
         [HttpPost]
         public ActionResult GetOrderRollHistorySummary(OrderHistoryCriteria criteria, DataTable dataTable)
