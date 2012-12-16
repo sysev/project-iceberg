@@ -14,6 +14,7 @@ namespace GF.Web.Models
     public abstract class ObjectItemViewModel<C, T>
     {
          
+        private static string COMMA = ", ";
         public string ViewKey { get; set; }
         public string Cols { get; set; }
         public C Criteria { get; set; }
@@ -33,7 +34,7 @@ namespace GF.Web.Models
             foreach (var sortItem in dataTable.SortColumns)
             {
                 if (OrderByClause.Length > 0)
-                    OrderByClause.Append(", ");
+                    OrderByClause.Append(COMMA);
                 OrderByClause.Append(ColumnList[sortItem.Item1] + " " + sortItem.Item2);
             }
             return OrderByClause.ToString();
@@ -48,14 +49,56 @@ namespace GF.Web.Models
                 if (!column.ShowByDefault)
                 {
                     if (sb.Length > 0)
-                        sb.Append(", ");
+                        sb.Append(COMMA);
                     sb.Append(ndx);
                 }
-                ndx++;
-                
+                ndx++; 
             }
             return sb.ToString();
         }
+         
+        public IList<IList<string>> AsTable(bool includeHeader)
+        {
+            var table =  new List<IList<string>>();
+
+            if (includeHeader)
+            {
+                var row = new List<string>();
+                foreach (var c in Columns)
+                {
+                    row.Add(c.DisplayName);
+                }
+                table.Add(row);
+            }
+
+            foreach (var item in Results)
+            {
+                var row = new List<string>();
+                foreach (var c in Columns)
+                {
+                    row.Add(c.ValueFunction(item));
+                }
+                table.Add(row);
+            }
+            return table;
+        }
+
+        public IList<IList<KeyValuePair<string, string>>> AsKeyValuePairList()
+        {
+           var result =  new List<IList<KeyValuePair<string, string>>>();
+           foreach (var item in Results)
+           {
+               var row = new List<KeyValuePair<string, string>>();
+               foreach (var c in Columns)
+               {
+                   row.Add(new KeyValuePair<string,string>(c.Name, c.ValueFunction(item)));
+               }
+               result.Add(row);
+           }
+           return result;
+        }
+         
+        public IList<T> Results { get; set; }
 
         public string ColumnKey
         {

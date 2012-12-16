@@ -52,7 +52,7 @@ namespace GF.Web.Models
                // response.ContentEncoding = this.ContentEncoding;
             }
 
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ReportModel), new List<Type>() { typeof(ReportModel), typeof(OrderHistoryCriteria), typeof(DataTableDataMember)});
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ReportModel), new List<Type>() { typeof(ReportModel), typeof(OrderHistoryCriteria), typeof(DataTableDataMember), typeof(EmptyCriteria)});
             MemoryStream ms = new MemoryStream();
             serializer.WriteObject(ms, reportModel);
             string json = response.ContentEncoding.GetString(ms.ToArray());

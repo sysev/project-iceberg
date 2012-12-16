@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using GF.Data;
 using GF.Data.Helpers;
 using GF.Data.Models;
+using GF.Web.Infrastructure;
 using GF.Web.Models;
 using GF.Web.Security;
 
@@ -38,7 +40,7 @@ namespace GF.Web.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("HistoryDetailServerSide", new { CustomerID = CustomerID }); 
+            return RedirectToAction("HistoryDetailReport", new { CustomerID = CustomerID }); 
         }
 
         public ActionResult HistoryDetail(int? CustomerID)
@@ -48,7 +50,7 @@ namespace GF.Web.Controllers
         }
 
  
-        public ActionResult HistoryDetailServerSide(int? CustomerID)
+        public ActionResult HistoryDetailReport(int? CustomerID)
         {
 
             var model = new HistoryDetailViewModel();
@@ -58,7 +60,27 @@ namespace GF.Web.Controllers
 
             return View(new HistoryDetailViewModel(this.GetGuid(), colList));
         }
-         
+
+        public ActionResult InventoryStatusReport(int? CustomerID)
+        {
+            var model = new InventoryStatusViewModel();
+            string colList = this.GetGuidSession(model.ColumnKey) as string;
+            if (colList == null)
+                colList = model.GetColumnIndexesToBeHidden();
+
+            return View(new InventoryStatusViewModel(this.GetGuid(), colList));
+        }
+
+        public ActionResult InventoryAgingReport(int? CustomerID)
+        {
+            var model = new InventoryAgingViewModel();
+            string colList = this.GetGuidSession(model.ColumnKey) as string;
+            if (colList == null)
+                colList = model.GetColumnIndexesToBeHidden();
+
+            return View(new InventoryAgingViewModel(this.GetGuid(), colList));
+        }
+
         [HttpPost]
         public ActionResult GetOrderRollHistory(OrderHistoryCriteria criteria, DataTable dataTable)
         { 
@@ -71,19 +93,77 @@ namespace GF.Web.Controllers
             return GetResults<OrderRoll>(criteria, dataTable, HistoryDetails, model.Columns); 
         }
 
-        public ActionResult MaterialAvailabilityServerSide(int? CustomerID)
+
+        public ActionResult ExportToXml()
         {
-            var model = new MaterialAvailabilityViewModel();
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetXMLResult(model.AsKeyValuePairList());
+        }
+
+        
+        public ActionResult ExportToCSV()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetCSVResult(model.AsTable(true));
+        }
+
+        public ActionResult ExportToPDF()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return File(ExportResultHelper.GetPDF(model.AsTable(true)), "application/pdf", "Report.pdf");
+           
+        }
+       
+
+
+        [HttpPost]
+        public ActionResult GetOrderRollHistorySummary(OrderHistoryCriteria criteria, DataTable dataTable)
+        {
+            var model = new HistorySummaryViewModel();
+            this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
+            var orderByClause = model.GetOrderByClause(dataTable);
+            IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>();
+            return GetResults<OrderRoll>(criteria, dataTable, HistoryDetails, model.Columns);
+        }
+
+        [HttpPost]
+        public ActionResult GetInventory(EmptyCriteria criteria, DataTable dataTable)
+        {
+            var model = new InventoryStatusViewModel();
+            this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
+            var orderByClause = model.GetOrderByClause(dataTable);
+            IList<MaterialAvailability> MaterialAvailability = _gfRepository.GetMaterialAvailability(CustomerID).OrderBy(orderByClause).ToList<MaterialAvailability>();
+
+            return GetResults<MaterialAvailability>(criteria, dataTable, MaterialAvailability, model.Columns);
+        }
+
+        [HttpPost]
+        public ActionResult GetInventoryAging(EmptyCriteria criteria, DataTable dataTable)
+        {
+            var model = new InventoryAgingViewModel();
+            this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
+            var orderByClause = model.GetOrderByClause(dataTable);
+            IList<MaterialAvailability> MaterialAvailability = _gfRepository.GetMaterialAvailability(CustomerID).OrderBy(orderByClause).ToList<MaterialAvailability>();
+
+            return GetResults<MaterialAvailability>(criteria, dataTable, MaterialAvailability, model.Columns);
+        }
+
+        public ActionResult HistorySummaryReport(int? CustomerID)
+        {
+            var model = new HistorySummaryViewModel();
             string colList = this.GetGuidSession(model.ColumnKey) as string;
             if (colList == null)
                 colList = model.GetColumnIndexesToBeHidden(); 
-            return View(new MaterialAvailabilityViewModel(this.GetGuid(), colList));
+            return View(new HistorySummaryViewModel(this.GetGuid(), colList));
         }
 
         [HttpPost]
         public ActionResult GetMaterialAvailability(DataTable dataTable)
         {
-           
+
             var model = new MaterialAvailabilityViewModel();
             this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
             var orderByClause = model.GetOrderByClause(dataTable);
