@@ -8,6 +8,7 @@ namespace GF.Web.Infrastructure
     public class Utils
     {
        
+        public static string XMLHeader = @"<?xml version=""1.0"" encoding=""UTF-8"" ?>";
 
         public static string XmlElement(KeyValuePair<string, string> item)
         {
@@ -15,14 +16,14 @@ namespace GF.Web.Infrastructure
         }
 
 
-        internal static string TagStart(Type type)
+        internal static string TagStart(string name)
         {
-            return Tag(type.Name, false);
+            return Tag(name, false);
         }
 
-        internal static String TagEnd(Type type)
+        internal static String TagEnd(string name)
         {
-            return Tag(type.Name, true);
+            return Tag(name, true);
         }
 
         private static string Tag(string Value, bool End){

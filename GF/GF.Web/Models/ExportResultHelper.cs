@@ -13,24 +13,31 @@ using iTextSharp.text.pdf;
 
 namespace GF.Web.Models
 {
+
+   
     /// <summary>
     /// This class represents an MVC Action result for
     /// a jquery.datatables response.
     /// </summary>
     public class ExportResultHelper 
     {
+        private static string ITEM = "Item";
+        private static string REPORT = "Report";
+
         public static ActionResult GetXMLResult(IList<IList<KeyValuePair<string, string>>> table)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(Utils.XMLHeader);
+            sb.Append(Utils.TagStart(REPORT));
             foreach (var row in table)
             {
-                sb.Append(Utils.TagStart(row.GetType()));
+                sb.Append(Utils.TagStart(ITEM));
                 foreach (var column in row)
                 {
                     sb.Append(Utils.XmlElement(column));
                 }
-                sb.Append(Utils.TagStart(row.GetType()));
+                sb.Append(Utils.TagEnd(ITEM));
             }
+            sb.Append(Utils.TagEnd(REPORT));
             var bytes = System.Text.Encoding.UTF8.GetBytes(sb.ToString());
             var ms = new MemoryStream(bytes, false);
             return new FileStreamResult(ms, "text/xml")
