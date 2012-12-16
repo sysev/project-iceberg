@@ -16,6 +16,18 @@ namespace GF.Web.Controllers
             return View();
         }
 
+        public String SendReplenishmentMessage(String autoReplenishMessage)
+        {
+            // So here is the problem.  
+            // SAP connector that GF gave me is compiled with .NET 4.0.  
+            // So my GF.SAPConnector is also compiled with .NET 4.0.
+            // So I cannot incorporate it into the GF.WEB project cause it is compiled with .NET 4.5.
+
+            // The sample code to invoke GF.SAPConnector is in the SAPConnectorTest class in the same project.
+
+            return "Successfully send message: " + autoReplenishMessage;
+        }
+
         public String SendMQMessage(String autoReplenishMessage)
         {
             String messageText = autoReplenishMessage;
