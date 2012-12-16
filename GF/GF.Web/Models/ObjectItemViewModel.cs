@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace GF.Web.Models
 {
@@ -97,7 +99,19 @@ namespace GF.Web.Models
            }
            return result;
         }
-         
+
+        public MemoryStream AsStream()
+        { 
+            var stream = new MemoryStream();
+            var serializer = new XmlSerializer(typeof(List<T>)); 
+            //We turn it into an XML and save it in the memory
+            serializer.Serialize(stream, Results);
+            stream.Position = 0;
+            return stream;
+
+        }
+
+        [XmlElement("Items")]
         public IList<T> Results { get; set; }
 
         public string ColumnKey

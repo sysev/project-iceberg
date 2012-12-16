@@ -10,6 +10,7 @@ using System.Text;
 using GF.Web.Infrastructure;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using ExcelGenerator.SpreadSheet;
 
 namespace GF.Web.Models
 {
@@ -24,6 +25,8 @@ namespace GF.Web.Models
         private static string ITEM = "Item";
         private static string REPORT = "Report";
 
+
+        //custom excel formatting (sort of)
         public static ActionResult GetXMLResult(IList<IList<KeyValuePair<string, string>>> table)
         {
             StringBuilder sb = new StringBuilder(Utils.XMLHeader);
@@ -46,7 +49,44 @@ namespace GF.Web.Models
             };
         }
 
+         
         public static ActionResult GetCSVResult(IList<IList<string>> table)
+        {
+            return GetCSVOrXLSResult(table, "text/csv", "report.csv");
+        }
+
+        public static ActionResult GetXLSAsCSVResult(IList<IList<string>> table)
+        {
+            return GetCSVOrXLSResult(table, "application/excel", "report.csv");
+        }
+
+        //returns an XLS Stream
+        public static byte[] GetXLS(IList<IList<string>> table)
+        {
+            //Create a workbook
+            Workbook workbook = new Workbook();
+
+            //Create a worksheet
+            Worksheet worksheet = new Worksheet("Report");
+
+            //Create a new row
+            foreach (var row in table)
+            {
+                 var xlsRow = new ExcelGenerator.SpreadSheet.Row();
+                 foreach (var col in row)
+                 {
+                     xlsRow.Cells.Add(new ExcelGenerator.SpreadSheet.Cell(col));
+                 }
+                 worksheet.Rows.Add(xlsRow);
+            }
+             
+            //Add worksheet to Workbook
+            workbook.Worksheets.Add(worksheet);
+
+            return workbook.getBytes();
+        }
+
+        private static ActionResult GetCSVOrXLSResult(IList<IList<string>> table, string type, string name)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var row in table)
@@ -62,9 +102,9 @@ namespace GF.Web.Models
             }
             var bytes = System.Text.Encoding.UTF8.GetBytes(sb.ToString());
             var ms = new MemoryStream(bytes, false);
-            return new FileStreamResult(ms, "text/csv")
+            return new FileStreamResult(ms, type)
             {
-                FileDownloadName = "report.csv"
+                FileDownloadName = name
             };
         }
 

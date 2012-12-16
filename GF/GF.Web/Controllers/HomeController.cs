@@ -43,13 +43,23 @@ namespace GF.Web.Controllers
             return RedirectToAction("HistoryDetailReport", new { CustomerID = CustomerID }); 
         }
 
+        #region  Report Page Actions
+         
+        public ActionResult HistorySummaryReport(int? CustomerID)
+        {
+            var model = new HistorySummaryViewModel();
+            string colList = this.GetGuidSession(model.ColumnKey) as string;
+            if (colList == null)
+                colList = model.GetColumnIndexesToBeHidden();
+            return View(new HistorySummaryViewModel(this.GetGuid(), colList));
+        }
+          
         public ActionResult HistoryDetail(int? CustomerID)
         {
             var HistoryDetails = _gfRepository.GetOrderRolls(CustomerID.Value); 
             return View(HistoryDetails);
         }
-
- 
+         
         public ActionResult HistoryDetailReport(int? CustomerID)
         {
 
@@ -60,6 +70,7 @@ namespace GF.Web.Controllers
 
             return View(new HistoryDetailViewModel(this.GetGuid(), colList));
         }
+         
 
         public ActionResult InventoryStatusReport(int? CustomerID)
         {
@@ -81,43 +92,23 @@ namespace GF.Web.Controllers
             return View(new InventoryAgingViewModel(this.GetGuid(), colList));
         }
 
+      
+
+        #endregion
+         
+        #region Data Table Ajax Actions
+
         [HttpPost]
         public ActionResult GetOrderRollHistory(OrderHistoryCriteria criteria, DataTable dataTable)
-        { 
+        {
             var model = new HistoryDetailViewModel();
             this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
             var orderByClause = model.GetOrderByClause(dataTable);
             IList<OrderRoll> HistoryDetails = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>();
 
             //var criteria = new OrderHistoryCriteria();
-            return GetResults<OrderRoll>(criteria, dataTable, HistoryDetails, model.Columns); 
+            return GetResults<OrderRoll>(criteria, dataTable, HistoryDetails, model.Columns);
         }
-
-
-        public ActionResult ExportToXml()
-        {
-            var model = new HistoryDetailViewModel();
-            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
-            return ExportResultHelper.GetXMLResult(model.AsKeyValuePairList());
-        }
-
-        
-        public ActionResult ExportToCSV()
-        {
-            var model = new HistoryDetailViewModel();
-            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
-            return ExportResultHelper.GetCSVResult(model.AsTable(true));
-        }
-
-        public ActionResult ExportToPDF()
-        {
-            var model = new HistoryDetailViewModel();
-            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
-            return File(ExportResultHelper.GetPDF(model.AsTable(true)), "application/pdf", "Report.pdf");
-           
-        }
-       
-
 
         [HttpPost]
         public ActionResult GetOrderRollHistorySummary(OrderHistoryCriteria criteria, DataTable dataTable)
@@ -151,15 +142,6 @@ namespace GF.Web.Controllers
             return GetResults<MaterialAvailability>(criteria, dataTable, MaterialAvailability, model.Columns);
         }
 
-        public ActionResult HistorySummaryReport(int? CustomerID)
-        {
-            var model = new HistorySummaryViewModel();
-            string colList = this.GetGuidSession(model.ColumnKey) as string;
-            if (colList == null)
-                colList = model.GetColumnIndexesToBeHidden(); 
-            return View(new HistorySummaryViewModel(this.GetGuid(), colList));
-        }
-
         [HttpPost]
         public ActionResult GetMaterialAvailability(DataTable dataTable)
         {
@@ -185,7 +167,7 @@ namespace GF.Web.Controllers
                 foreach (var c in Columns)
                 {
                     var obj = Objects[i];
-                    var value = c.ValueFunction(obj); 
+                    var value = c.ValueFunction(obj);
                     row.Add(value);
                 }
                 table.Add(row);
@@ -197,7 +179,72 @@ namespace GF.Web.Controllers
             return result;
         }
 
+        #endregion
          
+        #region Export Actions
+         
+        /// <summary>
+        ///   Below includes various ways exports can be created
+        ///   there are some base object methods that help support exporting
+        /// </summary>
+        /// <returns></returns>
+
+        public ActionResult ExportToExcel()
+        {
+
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+
+            var bytes = ExportResultHelper.GetXLS(model.AsTable(true));
+            return new ExcelResult(bytes, "filename.xls");
+        }
+
+        // EXCEL Export #2, just a CSV... but you don't get an annoying popup
+        public ActionResult ExportToExcel2()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetXLSAsCSVResult(model.AsTable(true));
+        }
+
+        //Uses default serializer to get the job done
+        public ActionResult ExportToXml()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return File(model.AsStream(), "data/xml", "Results.xml");
+        }
+
+
+
+        public ActionResult ExportToCSV()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetCSVResult(model.AsTable(true));
+        }
+
+        // XML Export #2
+        //Performs a more customized XML format rather than the default
+        public ActionResult ExportToXml2()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return ExportResultHelper.GetXMLResult(model.AsKeyValuePairList());
+        }
+
+        public ActionResult ExportToPDF()
+        {
+            var model = new HistoryDetailViewModel();
+            model.Results = _gfRepository.GetOrderRolls(1).Take(200).ToList();
+            return File(ExportResultHelper.GetPDF(model.AsTable(true)), "application/pdf", "Report.pdf");
+
+        }
+
+
+        #endregion
+
+        
         public ActionResult About()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";

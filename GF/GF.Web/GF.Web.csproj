@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelGenerator">
+      <HintPath>..\packages\ExcelGenerator.1.4\lib\ExcelGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="iTextSharp">
       <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
     </Reference>
@@ -134,6 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveResults\ExcelResult.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -151,6 +155,7 @@
     <Compile Include="Infrastructure\GuidRoute.cs" />
     <Compile Include="Infrastructure\MyHelpers.cs" />
     <Compile Include="Infrastructure\Utils.cs" />
+    <Compile Include="Models\ExcelResult.cs" />
     <Compile Include="Models\ExportResultHelper.cs" />
     <Compile Include="Models\InventoryAgingViewModel.cs" />
     <Compile Include="Models\InventoryStatusViewModel.cs" />

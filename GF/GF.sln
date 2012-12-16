@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4E8035
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GF.SAPConnector", "GF.SAPConnector\GF.SAPConnector.csproj", "{D9BA06F4-37BC-438E-A25B-ADD4DF02B270}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +30,6 @@ Global
 		{C4008BD5-722F-4B53-991A-BF50DC9B84D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4008BD5-722F-4B53-991A-BF50DC9B84D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4008BD5-722F-4B53-991A-BF50DC9B84D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9BA06F4-37BC-438E-A25B-ADD4DF02B270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9BA06F4-37BC-438E-A25B-ADD4DF02B270}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9BA06F4-37BC-438E-A25B-ADD4DF02B270}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9BA06F4-37BC-438E-A25B-ADD4DF02B270}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
