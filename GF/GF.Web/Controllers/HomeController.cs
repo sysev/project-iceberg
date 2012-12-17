@@ -92,11 +92,11 @@ namespace GF.Web.Controllers
             return View(new InventoryAgingViewModel(this.GetGuid(), colList));
         }
 
-      
+        public ActionResult Help(int? CustomerID)
+        {
+            return View();
+        }
 
-        #endregion
-         
-        #region Data Table Ajax Actions
 
         [HttpPost]
         public ActionResult GetOrderRollHistory(OrderHistoryCriteria criteria, DataTable dataTable)

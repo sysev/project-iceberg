@@ -9,6 +9,10 @@
 <h2 class="report">Inventory Aging Report</h2>
 <div class="panel">
     <h3 class="report">Results</h3>
+    <br /><br />
+    <div id="chart1" style="width:40%;float:left;margin:0 5%;"></div>
+    <div id="chart2" style="width:40%;float:left;margin:0 5%;"></div>
+    <br /><br />
     <table id="orderHistory">
         <thead>
             <tr>
@@ -32,6 +36,70 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        var data = [
+          ['0-30 Days', 12], ['31-60 Days', 9], ['61-90 Days', 14],
+          ['91-180 Days', 16], ['>180 Days', 7]
+        ];
+        var plot1 = jQuery.jqplot('chart1', [data],
+          {
+              seriesColors: ["#607C2F", "#C3B83F", "#EFC030", "#C67529", "#AD4B23"],
+              seriesDefaults: {
+                  // Make this a pie chart.
+                  renderer: jQuery.jqplot.PieRenderer,
+                  rendererOptions: {
+                      fill: false,
+                      showDataLabels: true, 
+                      // Add a margin to seperate the slices.
+                      sliceMargin: 4, 
+                      // stroke the slices with a little thicker line.
+                      lineWidth: 5
+                  }
+              },
+              title: 'Current Inventory Age Distribution',
+              legend: { show: true, location: 'e' }
+          }
+        );
+
+
+
+        var line1 = [['2010-09-01 0:00AM', 102], ['2010-10-01 0:00AM', 90], ['2010-11-01 0:00AM', 93], ['2010-12-01 0:00AM', 92], ['2011-01-01 0:00AM', 88], ['2011-02-01 0:00AM', 85], ['2011-03-01 0:00AM', 82], ['2011-04-01 0:00AM', 86], ['2011-05-01 0:00AM', 84], ['2011-06-01 0:00AM', 78], ['2011-07-01 0:00AM', 78], ['2011-08-01 0:00AM', 80], ['2011-09-01 0:00AM', 76], ['2011-10-01 0:00AM', 80], ['2011-11-01 0:00AM', 73], ['2011-12-01 0:00AM', 72], ['2012-01-01 0:00AM', 70], ['2012-02-01 0:00AM', 72], ['2012-03-01 0:00AM', 70], ['2012-04-01 0:00AM', 68], ['2012-05-01 0:00AM', 69], ['2012-06-01 0:00AM', 72], ['2012-07-01 0:00AM', 68], ['2012-08-01 0:00AM', 66], ['2012-09-01 0:00AM', 68], ['2012-10-01 0:00AM', 66], ['2012-11-01 0:00AM', 64], ['2012-12-01 0:00AM', 63]];
+        var plot2 = $.jqplot('chart2', [line1],
+          {
+              axes: { xaxis: { renderer: $.jqplot.DateAxisRenderer } },
+              title: 'Average Inventory Age Over Time',
+              // Series options are specified as an array of objects, one object
+              // for each series.
+              series: [
+                  {
+                      // Change our line width and use a diamond shaped marker.
+                      lineWidth: 2,
+                      markerOptions: { style: 'dimaond' }
+                  },
+                  {
+                      // Don't show a line, just show markers.
+                      // Make the markers 7 pixels with an 'x' style
+                      showLine: false,
+                      markerOptions: { size: 7, style: "x" }
+                  },
+                  {
+                      // Use (open) circlular markers.
+                      markerOptions: { style: "circle" }
+                  },
+                  {
+                      // Use a thicker, 5 pixel line and 10 pixel
+                      // filled square markers.
+                      lineWidth: 5,
+                      markerOptions: { style: "filledSquare", size: 10 }
+                  }
+              ]
+          }
+        );
+
+
+
+
+
         //http://www.datatables.net
         var viewKey = '@Model.ViewKey';
         var oTables;

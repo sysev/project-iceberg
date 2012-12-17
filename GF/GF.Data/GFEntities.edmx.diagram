@@ -7,7 +7,7 @@
       <Diagram DiagramId="1a02661fc80a4937bcb9336ac426c9d4" Name="Diagram1">
         <EntityTypeShape EntityType="GFDBModel.AutoReplenishment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GFDBModel.MaterialAvailability" Width="4" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GFDBModel.OrderRoll" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GFDBModel.OrderRoll" Width="1.5" PointX="7.375" PointY="0.5" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
