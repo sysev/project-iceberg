@@ -1,36 +1,12 @@
 ﻿@using GF.Web.Models
 @using GF.Web.Infrastructure
-@model HistorySummaryViewModel
+@model AutoReplenishmentViewModel
 
 @{
-    ViewBag.Title = "History Summary Report";
+    ViewBag.Title = "Auto Replenishment Report";
 }
 
-<h2 class="report">History Summary Report @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")</h2>
-<div class="panel criteria-panel">
-    <h3 class="report">Report Criteria</h3>
-    <div class="two-column-layout panel">
-        <div class="column">
-            <div class="row">
-                @Html.LabelFor(m => m.Criteria.MaterialNumber, "Material Number:")
-                <div class="input">
-                    @Html.TextBoxFor(m => m.Criteria.MaterialNumber)
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="row">
-                @Html.LabelFor(m => m.Criteria.CustomerPartNumber, "Customer Part Number:")
-                <div class="input">
-                    @Html.TextBoxFor(m => m.Criteria.CustomerPartNumber)
-                </div>
-            </div>            
-        </div>
-    </div>
-    <div class="command-bar">
-        <input type="submit" value="Search" />
-    </div>
-</div>
+<h2 class="report">Auto-Replenishment Report @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")</h2>
 
 <div class="panel">
     <h3 class="report">Results</h3>
@@ -72,13 +48,15 @@
                  { "sWidth": "50px" },
                  { "sWidth": "50px" },
                  { "sWidth": "50px" },
+                 { "sWidth": "50px" },
+                 { "sWidth": "50px" },
                  { "sWidth": "50px" }
             ],
             "bProcessing": true,
             "bServerSide": true,
             "bStateSave": true,
             "bFilter": false,
-            "sAjaxSource": '@Url.Content("~/Home/GetOrderRollHistorySummary")',
+            "sAjaxSource": '@Url.Content("~/Home/GetAutoReplenishment")',
             "oColVis": { "buttonText": '+/- Columns' },
             "fnServerData": function (url, data, callback, oSettings) {
                 var colvis = ' ';
@@ -108,13 +86,7 @@
                 });
             }
         });
-
         var oColVis = new ColVis(oTables.fnSettings());
         $('.ColVis_Button').addClass('small-button');
     });
-
-
 </script>
-
-
-

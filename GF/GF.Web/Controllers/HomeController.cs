@@ -40,7 +40,7 @@ namespace GF.Web.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("HistoryDetailReport", new { CustomerID = CustomerID }); 
+            return View(); 
         }
 
         #region  Report Page Actions
@@ -92,6 +92,16 @@ namespace GF.Web.Controllers
             return View(new InventoryAgingViewModel(this.GetGuid(), colList));
         }
 
+        public ActionResult AutoReplenishmentReport(int? CustomerID)
+        {
+            var model = new AutoReplenishmentViewModel();
+            string colList = this.GetGuidSession(model.ColumnKey) as string;
+            if (colList == null)
+                colList = model.GetColumnIndexesToBeHidden();
+
+            return View(new AutoReplenishmentViewModel(this.GetGuid(), colList));
+        }
+
         public ActionResult Help(int? CustomerID)
         {
             return View();
@@ -140,6 +150,17 @@ namespace GF.Web.Controllers
             IList<MaterialAvailability> MaterialAvailability = _gfRepository.GetMaterialAvailability(CustomerID).OrderBy(orderByClause).ToList<MaterialAvailability>();
 
             return GetResults<MaterialAvailability>(criteria, dataTable, MaterialAvailability, model.Columns);
+        }
+
+        [HttpPost]
+        public ActionResult GetAutoReplenishment(EmptyCriteria criteria, DataTable dataTable)
+        {
+            var model = new AutoReplenishmentViewModel();
+            this.SetGuidSession(dataTable.sKey, model.ColumnKey, dataTable.sColVis);
+            var orderByClause = model.GetOrderByClause(dataTable);
+            IList<OrderRoll> OrderRoll = _gfRepository.GetOrderRolls(CustomerID).OrderBy(orderByClause).ToList<OrderRoll>();
+
+            return GetResults<OrderRoll>(criteria, dataTable, OrderRoll, model.Columns);
         }
 
         [HttpPost]

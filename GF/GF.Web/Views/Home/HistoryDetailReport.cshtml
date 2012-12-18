@@ -7,7 +7,7 @@
     ViewBag.Title = "History Detail Report";
 }
 
-<h2 class="report">History Detail Report</h2>
+<h2 class="report">History Detail Report @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")</h2>
 
 <div class="panel criteria-panel">
     <h3 class="report">Report Criteria</h3>
@@ -17,14 +17,12 @@
                 @Html.LabelFor(m => m.Criteria.MaterialNumber, "Material Number:")
                 <div class="input">
                     @Html.TextBoxFor(m => m.Criteria.MaterialNumber)
-                    @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")
                 </div>
             </div>
             <div class="row">
                 @Html.LabelFor(m => m.Criteria.CustomerPartNumber, "Customer Part Number:")
                 <div class="input">
                     @Html.TextBoxFor(m => m.Criteria.CustomerPartNumber)
-                    @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")
                 </div>
             </div>
         </div>
@@ -33,14 +31,12 @@
                 @Html.LabelFor(m => m.Criteria.RollNumber, "Roll Number:")
                 <div class="input">
                     @Html.TextBoxFor(m => m.Criteria.RollNumber)
-                    @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")
                 </div>
             </div>
             <div class="row">
                 @Html.LabelFor(m => m.Criteria.CustomerPONumber, "Customer PO Number:")
                 <div class="input">
                     @Html.TextBoxFor(m => m.Criteria.CustomerPONumber)
-                    @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")
                 </div>
             </div>
         </div>
@@ -78,6 +74,9 @@
                 <input type="button" class="small-button" value="Dec 2012" />
             </div>
         </div>
+    </div>
+    <div class="command-bar">
+        <input type="submit" value="Search" />
     </div>
 </div>
 

@@ -155,6 +155,7 @@
     <Compile Include="Infrastructure\GuidRoute.cs" />
     <Compile Include="Infrastructure\MyHelpers.cs" />
     <Compile Include="Infrastructure\Utils.cs" />
+    <Compile Include="Models\AutoReplenishmentViewModel.cs" />
     <Compile Include="Models\ExcelResult.cs" />
     <Compile Include="Models\ExportResultHelper.cs" />
     <Compile Include="Models\InventoryAgingViewModel.cs" />
@@ -433,6 +434,7 @@
     <Content Include="Views\Home\InventoryStatusReport.cshtml" />
     <Content Include="Views\Home\InventoryAgingReport.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Home\AutoReplenishmentReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

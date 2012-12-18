@@ -33,7 +33,7 @@ namespace GF.Web.Infrastructure
             return MvcHtmlString.Create(anchorHtml);
         }
 
-        public static MvcHtmlString ActionImage(this HtmlHelper html, string action, string controllerName, object routeValues, string imagePath, string alt)
+        public static MvcHtmlString ActionImage(this HtmlHelper html, string action, string controllerName, ActionResult routeValues, string imagePath, string alt)
         {
             var url = new UrlHelper(html.ViewContext.RequestContext);
 

@@ -18,6 +18,7 @@ a {
     padding-left: 3px;
     padding-right: 3px;
     text-decoration: underline;
+    cursor:pointer;
 }
 
     a:link, a:visited,
@@ -427,6 +428,10 @@ aside {
     font-weight: 700;
 }
 
+input.in-table {
+        width:75%;
+    }
+
 /* login page */
 #loginForm {
     border-right: solid 2px #c8c8c8;
@@ -564,6 +569,9 @@ button {
 	-webkit-border-radius:4px;
 }
 
+.command-bar {
+    text-align:right;
+}
 
 input[type="button"]:hover,
 input[type="submit"]:hover,
