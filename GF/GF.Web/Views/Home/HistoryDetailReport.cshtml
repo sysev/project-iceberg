@@ -44,27 +44,44 @@
     <div class="panel">
         <div class="order-status horizontal-layout clear-fix">
             <div class="layout-item">
-                @Html.LabelFor(m => m.Criteria.OrderStatus, "Ordered:")
-                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "ordered")
+                <div id="ordered" class="order-status-option"></div>
+                <span class="hidden">@Html.RadioButtonFor(m => m.Criteria.OrderStatus, "ordered")</span>
             </div>
             <div class="layout-item">
-                @Html.LabelFor(m => m.Criteria.OrderStatus, "Shipped:")
-                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "shipped")
+                <div id="shipped" class="order-status-option"></div>
+                <span class="hidden">@Html.RadioButtonFor(m => m.Criteria.OrderStatus, "shipped")</span>
             </div>
             <div class="layout-item">
-                @Html.LabelFor(m => m.Criteria.OrderStatus, "Received:")
-                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "received")
+                <div id="received" class="order-status-option"></div>
+                <span class="hidden">@Html.RadioButtonFor(m => m.Criteria.OrderStatus, "received")</span>
             </div>
             <div class="layout-item">
-                @Html.LabelFor(m => m.Criteria.OrderStatus, "Used:")
-                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "used")
+                <div id="used" class="order-status-option"></div>
+                <span class="hidden">@Html.RadioButtonFor(m => m.Criteria.OrderStatus, "used")</span>
             </div>
             <div class="layout-item">
-                @Html.LabelFor(m => m.Criteria.OrderStatus, "Last Physical Inventory")
-                @Html.RadioButtonFor(m => m.Criteria.OrderStatus, "lastPhysicalInventory")
+                <div id="lastphysical" class="order-status-option"></div>
+                <span class="hidden">@Html.RadioButtonFor(m => m.Criteria.OrderStatus, "lastPhysicalInventory")</span>
             </div>
         </div>
-        
+        <div class="two-column-layout">
+            <div class="column">
+                <div class="row">
+                    @Html.LabelFor(m => m.Criteria.OrderStatusFromDate, "Received On/After:")
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Criteria.OrderStatusFromDate)
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row">
+                    @Html.LabelFor(m => m.Criteria.OrderStatusToDate, "Received Before/On:")
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Criteria.OrderStatusToDate)
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="date-range-container">
             <div class="date-range-slider"></div>
             <div class="button-container horizontal-layout clear-fix">
@@ -105,6 +122,22 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('.order-status-option').on('mouseover', function (event) {
+            $(this).addClass('hover');
+        }).on('mouseout', function (event) {
+            $(this).removeClass('hover');
+        }).on('click', function (event) {
+            $('.order-status-option').not(this).removeClass('active');
+            $(this).toggleClass('active');
+        });
+
+        $('#Criteria_OrderStatusFromDate, #Criteria_OrderStatusToDate').datepicker({
+            showOn: "both",
+            buttonImage: "/Images/calendar.png",
+            buttonImageOnly: true
+        });
+
         var today = new Date().resetTime();
         var lastMonth = today.clone().add('M', -1);
         var lastYear = today.clone().add('y', -1);
@@ -124,10 +157,19 @@
                   year = val.getYear() + 1900;
                 return month + "/" + days + "/" + year;
             }
-        }).bind("valuesChanged", function (e, data) {
-            console.log(data);
-        });
+        }).on("valuesChanging", function (e, data) {
 
+            var parseDate = function (str) {
+                var parts = str.split(' ');
+                var MMM = parts[1];
+                var dd = parts[2];
+                var yyyy = parts[3];
+
+                return new Date(yyyy, MONTHS_MAP[MMM], dd);
+            }
+
+            console.log(data.values, data.values.min.getYear());
+        });
 
         //http://www.datatables.net
         var loadCookie = function () {

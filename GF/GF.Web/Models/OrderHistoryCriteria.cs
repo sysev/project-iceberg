@@ -28,7 +28,10 @@ namespace GF.Web.Models
         [DataMember(Name = "orderStatus")]
         public bool OrderStatus { get; set; }
 
-        
+        [DataMember(Name = "orderStatusFromDate")]
+        public string OrderStatusFromDate { get; set; }
 
+        [DataMember(Name = "orderStatusToDate")]
+        public string OrderStatusToDate { get; set; }
     }
 }

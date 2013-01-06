@@ -211,6 +211,10 @@ input {
     margin-top: 3em;
 }
 
+.hidden {
+    display:none;
+}
+
 .two-column-layout .column {
     float:left;
     width:46%;
@@ -350,6 +354,43 @@ section.feature {
     width: 300px;
     float: left;
     padding: 10px;
+}
+
+.order-status-option {
+    width:180px;
+    height: 50px;
+    background-image: url("../Images/order-status.png");
+    background-repeat: no-repeat;
+    cursor:pointer;
+    background-position-y:0;
+}
+
+.order-status-option.hover {
+    background-position-y:-50px;
+}
+
+.order-status-option.active {
+    background-position-y:-100px !important;
+}
+
+#ordered {
+    background-position-x: 0;
+}
+
+#shipped {
+    background-position-x: -180px;
+}
+
+#received {
+    background-position-x: -360px;
+}
+
+#used {
+    background-position-x: -540px;
+}
+
+#lastphysical {
+    background-position-x: -720px;
 }
 
 /* ordered list */
