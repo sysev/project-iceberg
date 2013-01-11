@@ -7,7 +7,25 @@
 }
 
 <h2 class="report">Auto-Replenishment Report @Html.ActionImage("Help", "Home", null,"~/Images/help.png", "Help")</h2>
-
+<div class="panel criteria-panel">
+    <h3 class="report">Report Criteria</h3>
+    <div class="two-column-layout panel">
+        <div class="column">
+            <div class="row">
+                <label>Auto Replenishment:</label>
+                <div class="input">
+                    <select>
+                        <option>On</option>
+                        <option>Off</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="command-bar">
+        <input type="submit" value="Search" />
+    </div>
+</div>
 <div class="panel">
     <h3 class="report">Results</h3>
     <table id="orderHistory">
@@ -28,11 +46,40 @@
         @Html.ActionImage("ExportToPDF", "Home", null,"~/Images/pdf.png", "Export To PDF")
         @Html.ActionImage("Print", "Home", null,"~/Images/print.png", "Print")
     </div>
-    <br /><br /><br />
+    <br />
+    <br /><br />
+    <div class="command-bar">
+        <input id="save-button" type="submit" value="Save" />
+    </div>
+
+    <div id="confirm-dialog">
+        <p>Are you sure you want to update the reorder information?</p>
+    </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#confirm-dialog').dialog({
+            title: 'Save Reorder Information?',
+            autoOpen: false,
+            modal: true,
+            buttons: [{
+                text: "Cancel",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            },
+            {
+                text: "Continue",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            }]
+        });
+        $('#save-button').on('click', function (event) {
+            $('#confirm-dialog').dialog('open');
+        });
+
         //http://www.datatables.net
         var viewKey = '@Model.ViewKey';
         var oTables;
